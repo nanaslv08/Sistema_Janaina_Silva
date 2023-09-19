@@ -119,6 +119,7 @@ public class JDlgProduto extends javax.swing.JDialog {
         // TODO add your handling code here:
         jDlgProdutoIA.setTitle("Inclusão");
         jDlgProdutoIA.setVisible(true);
+        
     }//GEN-LAST:event_JBS_jBtnIncluirActionPerformed
 
     private void JBS_jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnAlterarActionPerformed
@@ -130,7 +131,13 @@ public class JDlgProduto extends javax.swing.JDialog {
     private void JBS_jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnExcluirActionPerformed
         // TODO add your handling code here:
         if(Util.perguntar("Deseja excuir o produto?") == true){
-
+            int sel = jTable1.getSelectedRow();
+            JbsProduto jbsProduto = produtoControle.getBean(sel);
+            produtoDAO.delete(jbsProduto);
+            List lista = produtoDAO.listAll();
+            produtoControle.setList(lista);
+        } else {
+            Util.mensagem("Exclusão Cncelada");
         }
     }//GEN-LAST:event_JBS_jBtnExcluirActionPerformed
 

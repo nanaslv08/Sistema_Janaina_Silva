@@ -5,12 +5,15 @@
  */
 package view;
 
+import bean.JbsProduto;
+import dao.ProdutoDAO;
+
 /**
  *
  * @author Janaína B da Silva
  */
 public class JDlgProdutoIA extends javax.swing.JDialog {
-
+    ProdutoDAO produtoDAO;
     /**
      * Creates new form JDlgProdutoIA
      */
@@ -18,6 +21,19 @@ public class JDlgProdutoIA extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+    }
+    
+    //COLOCAR O VIEW BEAN AQUI E O BEAN VIEW TAMBÉM 
+    public JbsProduto ViewBean(){
+        JbsProduto jbsProduto = new JbsProduto();
+        int id = Integer.valueOf(JBS_jTxtCodigo.getText());
+        jbsProduto.setJbsIdProduto(id);
+        jbsProduto.setNome(JBS_jTxtNome.getText());
+        double valor = Double.parseDouble(JBS_jFmtValor.getText());
+        jbsProduto.setValor(valor);
+        jbsProduto.setCategoria(JBS_jTxtCategoria.getText());
+        jbsProduto.setEspecificacao(JBS_jTxtEspecificacoes.getText());
+        return jbsProduto;
     }
 
     /**
@@ -153,6 +169,8 @@ public class JDlgProdutoIA extends javax.swing.JDialog {
 
     private void JBS_jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnOKActionPerformed
         // TODO add your handling code here:
+        JbsProduto jbsProduto = ViewBean();
+        produtoDAO.insert(jbsProduto);
         setVisible(false);
     }//GEN-LAST:event_JBS_jBtnOKActionPerformed
 

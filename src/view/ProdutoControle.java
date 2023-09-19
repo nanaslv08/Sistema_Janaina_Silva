@@ -19,6 +19,7 @@ public class ProdutoControle extends AbstractTableModel{
     
     public void setList(List lista){
         this.lista = lista;
+        this.fireTableDataChanged();
     }
     
     public JbsProduto getBean(int row){
