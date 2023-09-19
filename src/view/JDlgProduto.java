@@ -5,6 +5,9 @@
  */
 package view;
 
+import bean.JbsProduto;
+import dao.ProdutoDAO;
+import java.util.List;
 import tools.Util;
 import view.JDlgProdutoIA;
 
@@ -14,7 +17,11 @@ import view.JDlgProdutoIA;
  */
 public class JDlgProduto extends javax.swing.JDialog {
     
-    JDlgProdutoIA jDlgProdutoIA;
+//    JDlgProdutoIA jDlgProdutoIA;
+    ProdutoDAO produtoDAO;
+    JbsProduto jbsProduto;
+    ProdutoControle produtoControle;
+    private JDlgProdutoIA jDlgProdutoIA;
     /**
      * Creates new form JDlgProduto
      */
@@ -23,7 +30,14 @@ public class JDlgProduto extends javax.swing.JDialog {
         initComponents();
          setTitle("Cadastro de Produto");
         setLocationRelativeTo(null);
+        
         jDlgProdutoIA = new JDlgProdutoIA(null, true);
+        produtoDAO = new ProdutoDAO();
+        List lista = produtoDAO.listAll();
+        produtoControle = new ProdutoControle();
+        produtoControle.setList(lista);
+        jTable1.setModel(produtoControle);
+        
     }
 
     /**

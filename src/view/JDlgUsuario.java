@@ -24,12 +24,15 @@ public class JDlgUsuario extends javax.swing.JDialog {
     private boolean incluindo;
     MaskFormatter mascaraCpf;
     MaskFormatter mascaraData;
+    public JbsUsuario jbsUsuario;
+    public UsuarioDAO usuarioDAO;
     /**
      * Creates new form JDlgUsuario
      */
     public JDlgUsuario(java.awt.Frame parent, boolean modal) {
        super(parent, modal);
         initComponents();
+        usuarioDAO = new UsuarioDAO();
         Util.habilitar(false,JBS_jTxtCodigo, JBS_jTxtNome, JBS_jTxtApelido, JBS_jFmtCpf, JBS_jFmtDataNascimento, JBS_jPwfSenha,
             JBS_jCboNivel, JBS_jChbAtivo, JBS_jBtnCancelar, JBS_jBtnConfirmar);
         Util.habilitar(true, JBS_jBtnIncluir, JBS_jBtnAlterar, JBS_jBtnExcluir, JBS_jBtnPesquisar);
@@ -61,11 +64,12 @@ public class JDlgUsuario extends javax.swing.JDialog {
             System.out.print("por favor funciona: " + ex.getMessage());
         }
         jbsUsuario.setJbsNivel(JBS_jCboNivel.getSelectedIndex());
-        if(JBS_jChbAtivo.isSelected()==true){
-        jbsUsuario.setJbsAtivo("S");
-        } else {
-        jbsUsuario.setJbsAtivo("N");
-        }
+        jbsUsuario.setJbsAtivo(JBS_jChbAtivo.isSelected() == true ? "S" : "N");
+//        if(JBS_jChbAtivo.isSelected()==true){
+//        jbsUsuario.setJbsAtivo("S");
+//        } else {
+//        jbsUsuario.setJbsAtivo("N");
+//        }
         return jbsUsuario;
     }
     
@@ -358,7 +362,8 @@ public class JDlgUsuario extends javax.swing.JDialog {
         //        limparCampos();
 
         if (Util.perguntar("Deseja excluir o registro?") == true){
-
+            jbsUsuario = ViewBean();
+            usuarioDAO.delete(jbsUsuario);
         }else{
             Util.mensagem("Exclusão cancelada");
         }
@@ -371,12 +376,18 @@ public class JDlgUsuario extends javax.swing.JDialog {
     }//GEN-LAST:event_JBS_jFmtCpfActionPerformed
 
     private void JBS_jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnConfirmarActionPerformed
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        jbsUsuario = ViewBean();
         if(incluindo == true){
-            usuarioDAO.insert(ViewBean());//bean com bean retorna bean
+            usuarioDAO.insert(jbsUsuario);
         } else {
-            usuarioDAO.update(ViewBean());
+            usuarioDAO.update(jbsUsuario);
         }
+//        UsuarioDAO usuarioDAO = new UsuarioDAO();
+//        if(incluindo == true){
+//            usuarioDAO.insert(ViewBean());//bean com bean retorna bean
+//        } else {
+//            usuarioDAO.update(ViewBean());
+//        }
         Util.habilitar(false,JBS_jTxtCodigo, JBS_jTxtNome, JBS_jTxtApelido, JBS_jFmtCpf, JBS_jFmtDataNascimento, JBS_jPwfSenha,
             JBS_jCboNivel, JBS_jChbAtivo, JBS_jBtnCancelar, JBS_jBtnConfirmar);
         Util.habilitar(true, JBS_jBtnIncluir, JBS_jBtnAlterar, JBS_jBtnExcluir, JBS_jBtnPesquisar);
