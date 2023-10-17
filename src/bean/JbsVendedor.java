@@ -31,14 +31,14 @@ public class JbsVendedor  implements java.io.Serializable {
      private String jbsCelular;
      private Date jbsDataNasc;
      private String jbsEstado;
-     private char jbsGenero;
+     private String jbsGenero;
 //     private Set jbsVendas = new HashSet(0);
 
     public JbsVendedor() {
     }
 
 	
-    public JbsVendedor(int jbsIdVendedor, String jbsNome, String jbsCpf, String jbsEmail, String jbsCelular, Date jbsDataNasc, String jbsEstado, char jbsGenero) {
+    public JbsVendedor(int jbsIdVendedor, String jbsNome, String jbsCpf, String jbsEmail, String jbsCelular, Date jbsDataNasc, String jbsEstado, String jbsGenero) {
         this.jbsIdVendedor = jbsIdVendedor;
         this.jbsNome = jbsNome;
         this.jbsCpf = jbsCpf;
@@ -134,11 +134,11 @@ public class JbsVendedor  implements java.io.Serializable {
 
     
     @Column(name="jbs_genero", nullable=false, length=1)
-    public char getJbsGenero() {
+    public String getJbsGenero() {
         return this.jbsGenero;
     }
     
-    public void setJbsGenero(char jbsGenero) {
+    public void setJbsGenero(String jbsGenero) {
         this.jbsGenero = jbsGenero;
     }
 

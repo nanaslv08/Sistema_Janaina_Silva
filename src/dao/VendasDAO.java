@@ -35,6 +35,8 @@ public class VendasDAO extends DaoAbstract{
     @Override
     public void delete(Object object) {
         session.beginTransaction();
+        session.flush();//limpar o cash do hibernate pra não enviar coisas erradas
+        session.clear();
         session.delete(object);
         session.getTransaction().commit();
     }

@@ -5,6 +5,9 @@
  */
 package view;
 
+import bean.JbsVendedor;
+import dao.VendedorDAO;
+import java.util.List;
 import tools.Util;
 import view.JDlgVendedorIA;
 
@@ -14,7 +17,10 @@ import view.JDlgVendedorIA;
  */
 public class JDlgVendedor extends javax.swing.JDialog {
 
-        JDlgVendedorIA jDlgVendedorIA;
+    VendedorDAO vendedorDAO;
+    JbsVendedor jbsVendedor;
+    VendedorControle vendedorControle;
+    private JDlgVendedorIA jDlgVendedorIA;
     /**
      * Creates new form JDlgVendedor
      */
@@ -23,7 +29,13 @@ public class JDlgVendedor extends javax.swing.JDialog {
         initComponents();
         setTitle("Cadastro de Vendedor");
         setLocationRelativeTo(null);
+        
         jDlgVendedorIA = new JDlgVendedorIA(null, true);
+        vendedorDAO = new VendedorDAO();
+        List lista = vendedorDAO.listAll();
+        vendedorControle = new VendedorControle();
+        vendedorControle.setList(lista);
+        jTable1.setModel(vendedorControle);
     }
 
     /**
@@ -103,20 +115,30 @@ public class JDlgVendedor extends javax.swing.JDialog {
 
     private void JBS_jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnIncluirActionPerformed
         // TODO add your handling code here:
+        jDlgVendedorIA = new JDlgVendedorIA(null,true);
         jDlgVendedorIA.setTitle("Inclusão");
+        jDlgVendedorIA.TelaAnterior(this);
         jDlgVendedorIA.setVisible(true);
     }//GEN-LAST:event_JBS_jBtnIncluirActionPerformed
 
     private void JBS_jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnAlterarActionPerformed
         // TODO add your handling code here:
+        jDlgVendedorIA = new JDlgVendedorIA(null,true);
         jDlgVendedorIA.setTitle("Alteração");
+        jDlgVendedorIA.TelaAnterior(this);
         jDlgVendedorIA.setVisible(true);
     }//GEN-LAST:event_JBS_jBtnAlterarActionPerformed
 
     private void JBS_jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-        if(Util.perguntar("Deseja excuir o produto?") == true){
-
+        if(Util.perguntar("Deseja excuir o vendedor?") == true){
+            int sel = jTable1.getSelectedRow();
+            JbsVendedor jbsVendedor = vendedorControle.getBean(sel);
+            vendedorDAO.delete(jbsVendedor);
+            List lista = vendedorDAO.listAll();
+            vendedorControle.setList(lista);
+        } else {
+            Util.mensagem("Exclusão Cncelada");
         }
     }//GEN-LAST:event_JBS_jBtnExcluirActionPerformed
 

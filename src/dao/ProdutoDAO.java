@@ -18,8 +18,6 @@ public class ProdutoDAO extends DaoAbstract{
     @Override
     public void insert(Object object) {
         session.beginTransaction(); //todas as operações do banco de dados são feitas com trnsações por conta do hibernate
-        session.flush();
-        session.clear();
         session.save(object);
         session.getTransaction().commit();//commit é pra salvar a transação, goback apaga tudo
     }
@@ -36,6 +34,8 @@ public class ProdutoDAO extends DaoAbstract{
     @Override
     public void delete(Object object) {
         session.beginTransaction();
+        session.flush();//limpar o cash do hibernate pra não enviar coisas erradas
+        session.clear();
         session.delete(object);
         session.getTransaction().commit();
     }

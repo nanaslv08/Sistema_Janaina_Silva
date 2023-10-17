@@ -21,7 +21,7 @@ public class JDlgProduto extends javax.swing.JDialog {
     ProdutoDAO produtoDAO;
     JbsProduto jbsProduto;
     ProdutoControle produtoControle;
-    private JDlgProdutoIA jDlgProdutoIA;
+    private JDlgProdutoIA jDlgProdutoIA;  //todo componente que tem alguma coisa importante é colocada em privado
     /**
      * Creates new form JDlgProduto
      */
@@ -117,14 +117,18 @@ public class JDlgProduto extends javax.swing.JDialog {
 
     private void JBS_jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnIncluirActionPerformed
         // TODO add your handling code here:
+        jDlgProdutoIA = new JDlgProdutoIA(null,true);
         jDlgProdutoIA.setTitle("Inclusão");
+        jDlgProdutoIA.TelaAnterior(this);
         jDlgProdutoIA.setVisible(true);
         
     }//GEN-LAST:event_JBS_jBtnIncluirActionPerformed
 
     private void JBS_jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnAlterarActionPerformed
         // TODO add your handling code here:
+        jDlgProdutoIA = new JDlgProdutoIA(null,true);
         jDlgProdutoIA.setTitle("Alteração");
+        jDlgProdutoIA.TelaAnterior(this);
         jDlgProdutoIA.setVisible(true);
     }//GEN-LAST:event_JBS_jBtnAlterarActionPerformed
 

@@ -5,18 +5,94 @@
  */
 package view;
 
+import bean.JbsVendedor;
+import dao.VendedorDAO;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
+import tools.Util;
+
 /**
  *
  * @author Janaína B da Silva
  */
 public class JDlgVendedorIA extends javax.swing.JDialog {
 
+    VendedorDAO vendedorDAO;
+    JDlgVendedor jDlgVendedor;
+    JbsVendedor jbsVendedor;
+    boolean incluir;
+    Util util;
+    MaskFormatter mascaraCelular;
+    MaskFormatter mascaraCpf;
+    MaskFormatter mascaraData;
     /**
      * Creates new form JDlgVendedor
      */
     public JDlgVendedorIA(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
+        Limpar();
+        incluir = false;
+        vendedorDAO = new VendedorDAO();
+        jbsVendedor = new JbsVendedor();
+        
+        try {
+            mascaraCelular = new MaskFormatter("(##) #####-####");
+            mascaraCpf = new MaskFormatter("###.###.###-##");
+            mascaraData = new MaskFormatter("##/##/####");
+        } catch (ParseException ex) {
+            Logger.getLogger(JDlgVendedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        JBS_jFmtCelular.setFormatterFactory(new DefaultFormatterFactory(mascaraCelular));
+        JBS_jFmtCPF.setFormatterFactory(new DefaultFormatterFactory(mascaraCpf));
+        JBS_jFmtDataNasc.setFormatterFactory(new DefaultFormatterFactory(mascaraData));
+    }
+    
+    public void Limpar(){
+        util.limparCampos(JBS_jFmtCPF, 
+                JBS_jFmtCelular,
+                JBS_jFmtDataNasc,
+                JBS_jTxtCodigo,
+                JBS_jTxtEmail,
+                JBS_jTxtEstado,
+                JBS_jTxtGenero,
+                JBS_jTxtNome
+        );
+    }
+    
+    public JbsVendedor ViewBean(){
+        JbsVendedor jbsVendedor = new JbsVendedor();
+        int id = Integer.valueOf(JBS_jTxtCodigo.getText());
+        jbsVendedor.setJbsIdVendedor(id);
+        jbsVendedor.setJbsNome(JBS_jTxtNome.getText());
+        jbsVendedor.setJbsEmail(JBS_jTxtEmail.getText());
+        jbsVendedor.setJbsCelular(JBS_jFmtCelular.getText());
+        jbsVendedor.setJbsCpf(JBS_jFmtCPF.getText());
+        //vendedor.setData_Nasc(jFmtDataNasc.gteText());
+        jbsVendedor.setJbsEstado(JBS_jTxtEstado.getText());
+        jbsVendedor.setJbsGenero(JBS_jTxtGenero.getText());
+        return jbsVendedor;
+    }
+    
+    public void beanView(JbsVendedor jbsVendedor){
+        String valor = String.valueOf(jbsVendedor.getJbsIdVendedor());
+        JBS_jTxtCodigo.setText(valor);
+        JBS_jTxtNome.setText(jbsVendedor.getJbsNome());
+        JBS_jTxtEmail.setText(jbsVendedor.getJbsEmail());
+        JBS_jFmtCelular.setText(jbsVendedor.getJbsCelular());
+        JBS_jFmtCPF.setText(jbsVendedor.getJbsCpf());
+//        jFmtDataNasc.setText(vendedor.getData_nasc());
+        JBS_jTxtEstado.setText(jbsVendedor.getJbsEstado());
+        JBS_jTxtGenero.setText(jbsVendedor.getJbsGenero());
+    }
+    
+    public void TelaAnterior(JDlgVendedor jDlgVendedor){
+        jDlgVendedor = jDlgVendedor;
     }
 
     /**
@@ -187,12 +263,26 @@ public class JDlgVendedorIA extends javax.swing.JDialog {
 
     private void JBS_jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnOKActionPerformed
         // TODO add your handling code here:
+        if(getTitle().equals("Inclusão")){
+            jbsVendedor = ViewBean();
+            vendedorDAO.insert(jbsVendedor);
+            util.mensagem("Incluindo");
+            setVisible(false);
+        }else if(getTitle().equals("Alteração")){
+        vendedorDAO.update(jbsVendedor);
+        util.mensagem("Alterando");
+        JBS_jTxtCodigo.setEnabled(false);
         setVisible(false);
+        } else{
+            util.mensagem("ERRO");
+        }
     }//GEN-LAST:event_JBS_jBtnOKActionPerformed
 
     private void JBS_jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnCancelarActionPerformed
         // TODO add your handling code here:
+        util.mensagem("Você cancelou a operação");
         setVisible(false);
+        Limpar();
     }//GEN-LAST:event_JBS_jBtnCancelarActionPerformed
 
     private void JBS_jTxtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jTxtNomeActionPerformed

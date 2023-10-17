@@ -7,6 +7,13 @@ package view;
 
 import bean.JbsProduto;
 import dao.ProdutoDAO;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
+import tools.Util;
 
 /**
  *
@@ -14,6 +21,12 @@ import dao.ProdutoDAO;
  */
 public class JDlgProdutoIA extends javax.swing.JDialog {
     ProdutoDAO produtoDAO;
+    JDlgProduto jDlgProduto;
+    JbsProduto jbsProduto;
+    boolean incluir;
+    Util util;
+    MaskFormatter mascaraValor;
+
     /**
      * Creates new form JDlgProdutoIA
      */
@@ -21,19 +34,51 @@ public class JDlgProdutoIA extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        Limpar();
+        incluir = false;
+        produtoDAO = new ProdutoDAO();
+        jbsProduto = new JbsProduto();
+        
+        try {
+            mascaraValor = new MaskFormatter("###.##");
+        } catch (ParseException ex) {
+            Logger.getLogger(JDlgProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JBS_jFmtValor.setFormatterFactory(new DefaultFormatterFactory(mascaraValor));
     }
     
     //COLOCAR O VIEW BEAN AQUI E O BEAN VIEW TAMBÉM 
+    public void Limpar(){
+        util.limparCampos(JBS_jFmtValor, 
+                JBS_jTxtCategoria,
+                JBS_jTxtCodigo,
+                JBS_jTxtEspecificacoes,
+                JBS_jTxtNome
+        );
+    }
     public JbsProduto ViewBean(){
         JbsProduto jbsProduto = new JbsProduto();
         int id = Integer.valueOf(JBS_jTxtCodigo.getText());
         jbsProduto.setJbsIdProduto(id);
-        jbsProduto.setNome(JBS_jTxtNome.getText());
+        jbsProduto.setJbsNome(JBS_jTxtNome.getText());
         double valor = Double.parseDouble(JBS_jFmtValor.getText());
-        jbsProduto.setValor(valor);
-        jbsProduto.setCategoria(JBS_jTxtCategoria.getText());
-        jbsProduto.setEspecificacao(JBS_jTxtEspecificacoes.getText());
+        jbsProduto.setJbsValor(valor);
+        jbsProduto.setJbsCategoria(JBS_jTxtCategoria.getText());
+        jbsProduto.setJbsEspecifica(JBS_jTxtEspecificacoes.getText());
         return jbsProduto;
+    }
+    
+    public void BeanView(JbsProduto jbsProduto){
+        String valor = String.valueOf(jbsProduto.getJbsIdProduto());
+        JBS_jTxtCodigo.setText(valor);
+        JBS_jTxtNome.setText(jbsProduto.getJbsNome());
+        JBS_jFmtValor.setText(String.valueOf(jbsProduto.getJbsValor()));
+        JBS_jTxtCategoria.setText(jbsProduto.getJbsCategoria());
+        JBS_jTxtEspecificacoes.setText(jbsProduto.getJbsEspecifica());
+    }
+    
+    public void TelaAnterior(JDlgProduto jDlgProduto){
+        jDlgProduto = jDlgProduto;
     }
 
     /**
@@ -169,14 +214,26 @@ public class JDlgProdutoIA extends javax.swing.JDialog {
 
     private void JBS_jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnOKActionPerformed
         // TODO add your handling code here:
-        JbsProduto jbsProduto = ViewBean();
-        produtoDAO.insert(jbsProduto);
+        if(getTitle().equals("Inclusão")){
+            jbsProduto = ViewBean();
+            produtoDAO.insert(jbsProduto);
+            util.mensagem("Incluindo");
+            setVisible(false);
+        }else if(getTitle().equals("Alteração")){
+        produtoDAO.update(jbsProduto);
+        util.mensagem("Alterando");
+        JBS_jTxtCodigo.setEnabled(false);
         setVisible(false);
+        } else{
+            util.mensagem("ERRO");
+        }
     }//GEN-LAST:event_JBS_jBtnOKActionPerformed
 
     private void JBS_jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnCancelarActionPerformed
         // TODO add your handling code here:
+        util.mensagem("Você cancelou a operação");
         setVisible(false);
+        Limpar();
     }//GEN-LAST:event_JBS_jBtnCancelarActionPerformed
 
     /**
