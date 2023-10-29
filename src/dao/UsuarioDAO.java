@@ -8,6 +8,7 @@ package dao;
 import bean.JbsUsuario;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -45,7 +46,7 @@ public class UsuarioDAO extends DaoAbstract{
     public Object list(int id) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(JbsUsuario.class);
-        criteria.add(Restrictions.eq("idusuario", id)); //método estático - eq = equals = igual
+        criteria.add(Restrictions.eq("jbsIdUsuario", id)); //método estático - eq = equals = igual
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;    
@@ -58,6 +59,16 @@ public class UsuarioDAO extends DaoAbstract{
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;    
+    }
+    
+    public List listNome(String nome){
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JbsUsuario.class);
+//        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
+        criteria.add(Restrictions.like("jbsNome", nome, MatchMode.ANYWHERE));
+        List lista = criteria.list();;
+        session.getTransaction().commit();
+        return lista;        
     }
     
 }
