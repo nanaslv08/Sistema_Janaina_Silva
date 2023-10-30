@@ -5,6 +5,10 @@
  */
 package view;
 
+import query.JDlgConsultaCliente;
+import query.JDlgConsultaProduto;
+import query.JDlgConsultaUsuario;
+import query.JDlgConsultaVendedor;
 import view.JDlgUsuario;
 import view.JDlgCliente;
 import view.JDlgProduto;
@@ -48,6 +52,11 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jMnuVendas = new javax.swing.JMenuItem();
         jMnuVendasProdutos = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jMenu1 = new javax.swing.JMenu();
+        jMnuConProduto = new javax.swing.JMenuItem();
+        jMnuConUsuario = new javax.swing.JMenuItem();
+        jMnuConVendedor = new javax.swing.JMenuItem();
+        jMnuConCliente = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -142,6 +151,42 @@ public class JFrmPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMnuMovimentos);
 
+        jMenu1.setText("Consultas");
+
+        jMnuConProduto.setText("Produto");
+        jMnuConProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuConProdutoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMnuConProduto);
+
+        jMnuConUsuario.setText("Usuario");
+        jMnuConUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuConUsuarioActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMnuConUsuario);
+
+        jMnuConVendedor.setText("Vendedor");
+        jMnuConVendedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuConVendedorActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMnuConVendedor);
+
+        jMnuConCliente.setText("Cliente");
+        jMnuConCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuConClienteActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMnuConCliente);
+
+        jMenuBar1.add(jMenu1);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -203,6 +248,30 @@ public class JFrmPrincipal extends javax.swing.JFrame {
 //        jDlgVendas.setVisible(true);
     }//GEN-LAST:event_jMnuVendasActionPerformed
 
+    private void jMnuConProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConProdutoActionPerformed
+        // TODO add your handling code here:
+        JDlgConsultaProduto  jDlgConsultaProduto = new JDlgConsultaProduto(null, true);
+        jDlgConsultaProduto.setVisible(true);
+    }//GEN-LAST:event_jMnuConProdutoActionPerformed
+
+    private void jMnuConUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConUsuarioActionPerformed
+        // TODO add your handling code here:
+        JDlgConsultaUsuario  jDlgConsultaUsuario = new JDlgConsultaUsuario(null, true);
+        jDlgConsultaUsuario.setVisible(true);
+    }//GEN-LAST:event_jMnuConUsuarioActionPerformed
+
+    private void jMnuConVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConVendedorActionPerformed
+        // TODO add your handling code here:
+        JDlgConsultaVendedor  jDlgConsultaVendedor = new JDlgConsultaVendedor(null, true);
+        jDlgConsultaVendedor.setVisible(true);
+    }//GEN-LAST:event_jMnuConVendedorActionPerformed
+
+    private void jMnuConClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConClienteActionPerformed
+        // TODO add your handling code here:
+        JDlgConsultaCliente  jDlgConsultaCliente = new JDlgConsultaCliente(null, true);
+        jDlgConsultaCliente.setVisible(true);
+    }//GEN-LAST:event_jMnuConClienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -241,8 +310,13 @@ public class JFrmPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMnuClientes;
+    private javax.swing.JMenuItem jMnuConCliente;
+    private javax.swing.JMenuItem jMnuConProduto;
+    private javax.swing.JMenuItem jMnuConUsuario;
+    private javax.swing.JMenuItem jMnuConVendedor;
     private javax.swing.JMenu jMnuMovimentos;
     private javax.swing.JMenu jMnuPrincipal;
     private javax.swing.JMenuItem jMnuProdutos;

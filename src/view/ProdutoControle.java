@@ -49,7 +49,7 @@ public class ProdutoControle extends AbstractTableModel{
             return jbsProduto.getJbsValor();
         }
         if(columnIndex == 3){
-            return jbsProduto.getJbsCategoria();
+            return jbsProduto.getJbsEspecifica();
         }
         return "";
     }
@@ -66,7 +66,7 @@ public class ProdutoControle extends AbstractTableModel{
             return "valor";
         }
         if(column == 3){
-            return "categoria";
+            return "especifica";
         }
         return "";
     }
