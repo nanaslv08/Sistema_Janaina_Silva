@@ -32,12 +32,13 @@ public class JDlgUsuario extends javax.swing.JDialog {
     public JDlgUsuario(java.awt.Frame parent, boolean modal) {
        super(parent, modal);
         initComponents();
+        setTitle("Cadastro de Usuarios");
+        setLocationRelativeTo(null);
         usuarioDAO = new UsuarioDAO();
         Util.habilitar(false,JBS_jTxtCodigo, JBS_jTxtNome, JBS_jTxtApelido, JBS_jFmtCpf, JBS_jFmtDataNascimento, JBS_jPwfSenha,
             JBS_jCboNivel, JBS_jChbAtivo, JBS_jBtnCancelar, JBS_jBtnConfirmar);
         Util.habilitar(true, JBS_jBtnIncluir, JBS_jBtnAlterar, JBS_jBtnExcluir, JBS_jBtnPesquisar);
-        setTitle("Cadastro de Usuarios");
-        setLocationRelativeTo(null);
+        
         try {
             mascaraCpf = new MaskFormatter("###.###.###-##");
             mascaraData = new MaskFormatter("##/##/####");

@@ -43,12 +43,12 @@ Contributor(s):
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://10.7.0.51:33062/db_janaina_silva?zeroDateTimeBehavior=convertToNull</property>
+<!--    <property name="hibernate.connection.url">jdbc:mysql://10.7.0.51:33062/db_janaina_silva?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">janaina_silva</property>
-    <property name="hibernate.connection.password">janaina_silva</property>
-<!--    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_janaina_silva?zeroDateTimeBehavior=convertToNull</property>
-    <property name="hibernate.connection.username">janaina_silva</property>
-    <property name="hibernate.connection.password"></property>-->
+    <property name="hibernate.connection.password">janaina_silva</property>-->
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_janaina_silva?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password"></property>
     <mapping class="bean.JbsVendaProduto"/>
     <mapping class="bean.JbsUsuario"/>
     <mapping class="bean.JbsVenda"/>

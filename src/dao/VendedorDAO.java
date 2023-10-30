@@ -8,6 +8,7 @@ package dao;
 import bean.JbsVendedor;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -19,8 +20,6 @@ public class VendedorDAO extends DaoAbstract{
     @Override
     public void insert(Object object) {
         session.beginTransaction(); //todas as operações do banco de dados são feitas com trnsações por conta do hibernate
-        session.flush();
-        session.clear();
         session.save(object);
         session.getTransaction().commit();//commit é pra salvar a transação, goback apaga tudo
     }
@@ -60,4 +59,33 @@ public class VendedorDAO extends DaoAbstract{
         return lista;    
     }
     
+    public List listNome(String nome){
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JbsVendedor.class);
+//        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
+        criteria.add(Restrictions.like("jbsNome", nome, MatchMode.ANYWHERE));
+        List lista = criteria.list();;
+        session.getTransaction().commit();
+        return lista;        
+    }
+    
+    public List listcpf(String cpf){
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JbsVendedor.class);
+//        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
+        criteria.add(Restrictions.like("jbsCpf", cpf, MatchMode.ANYWHERE));
+        List lista = criteria.list();;
+        session.getTransaction().commit();
+        return lista;        
+    }
+    public List listCpfNome(String cpf, String nome){
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JbsVendedor.class);
+//        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
+        criteria.add(Restrictions.like("jbsCpf", cpf, MatchMode.ANYWHERE));
+        criteria.add(Restrictions.like("jbsNome", nome, MatchMode.ANYWHERE));
+        List lista = criteria.list();;
+        session.getTransaction().commit();
+        return lista;        
+    }
 }

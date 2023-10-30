@@ -8,6 +8,7 @@ package dao;
 import bean.JbsProduto;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 /**
  *
@@ -57,6 +58,36 @@ public class ProdutoDAO extends DaoAbstract{
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;    
+    }
+    
+    public List listNome(String nome){
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JbsProduto.class);
+//        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
+        criteria.add(Restrictions.like("jbsNome", nome, MatchMode.ANYWHERE));
+        List lista = criteria.list();;
+        session.getTransaction().commit();
+        return lista;        
+    }
+    
+    public List listEspecifica(String especifica){
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JbsProduto.class);
+//        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
+        criteria.add(Restrictions.like("jbsEspecifica", especifica, MatchMode.ANYWHERE));
+        List lista = criteria.list();;
+        session.getTransaction().commit();
+        return lista;        
+    }
+    public List listEspecificaNome(String especifica, String nome){
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JbsProduto.class);
+//        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
+        criteria.add(Restrictions.like("jbsEspecifica", especifica, MatchMode.ANYWHERE));
+        criteria.add(Restrictions.like("jbsNome", nome, MatchMode.ANYWHERE));
+        List lista = criteria.list();;
+        session.getTransaction().commit();
+        return lista;        
     }
     
 }

@@ -71,4 +71,24 @@ public class UsuarioDAO extends DaoAbstract{
         return lista;        
     }
     
+    public List listcpf(String cpf){
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JbsUsuario.class);
+//        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
+        criteria.add(Restrictions.like("jbsCpf", cpf, MatchMode.ANYWHERE));
+        List lista = criteria.list();;
+        session.getTransaction().commit();
+        return lista;        
+    }
+    public List listCpfNome(String cpf, String nome){
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JbsUsuario.class);
+//        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
+        criteria.add(Restrictions.like("jbsCpf", cpf, MatchMode.ANYWHERE));
+        criteria.add(Restrictions.like("jbsNome", nome, MatchMode.ANYWHERE));
+        List lista = criteria.list();;
+        session.getTransaction().commit();
+        return lista;        
+    }
+    
 }

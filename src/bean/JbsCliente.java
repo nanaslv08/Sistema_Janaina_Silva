@@ -62,24 +62,24 @@ public class JbsCliente  implements java.io.Serializable {
         this.jbsEstado = jbsEstado;
         this.jbsCep = jbsCep;
     }
-    public JbsCliente(int jbsIdCliente, String jbsNome, String jbsCpf, String jbsRg, Date jbsDataNasc, String jbsCelular, String jbsGenero, String jbsEmail, String jbsNaturalidade, String jbsRua, String jbsBairro, String jbsNumcasa, String jbsCidade, String jbsEstado, String jbsCep, Set jbsVendas) {
-       this.jbsIdCliente = jbsIdCliente;
-       this.jbsNome = jbsNome;
-       this.jbsCpf = jbsCpf;
-       this.jbsRg = jbsRg;
-       this.jbsDataNasc = jbsDataNasc;
-       this.jbsCelular = jbsCelular;
-       this.jbsGenero = jbsGenero;
-       this.jbsEmail = jbsEmail;
-       this.jbsNaturalidade = jbsNaturalidade;
-       this.jbsRua = jbsRua;
-       this.jbsBairro = jbsBairro;
-       this.jbsNumcasa = jbsNumcasa;
-       this.jbsCidade = jbsCidade;
-       this.jbsEstado = jbsEstado;
-       this.jbsCep = jbsCep;
-       //this.jbsVendas = jbsVendas;
-    }
+//    public JbsCliente(int jbsIdCliente, String jbsNome, String jbsCpf, String jbsRg, Date jbsDataNasc, String jbsCelular, String jbsGenero, String jbsEmail, String jbsNaturalidade, String jbsRua, String jbsBairro, String jbsNumcasa, String jbsCidade, String jbsEstado, String jbsCep, Set jbsVendas) {
+//       this.jbsIdCliente = jbsIdCliente;
+//       this.jbsNome = jbsNome;
+//       this.jbsCpf = jbsCpf;
+//       this.jbsRg = jbsRg;
+//       this.jbsDataNasc = jbsDataNasc;
+//       this.jbsCelular = jbsCelular;
+//       this.jbsGenero = jbsGenero;
+//       this.jbsEmail = jbsEmail;
+//       this.jbsNaturalidade = jbsNaturalidade;
+//       this.jbsRua = jbsRua;
+//       this.jbsBairro = jbsBairro;
+//       this.jbsNumcasa = jbsNumcasa;
+//       this.jbsCidade = jbsCidade;
+//       this.jbsEstado = jbsEstado;
+//       this.jbsCep = jbsCep;
+//       //this.jbsVendas = jbsVendas;
+//    }
    
      @Id 
 

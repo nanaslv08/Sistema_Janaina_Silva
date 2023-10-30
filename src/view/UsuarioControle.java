@@ -32,7 +32,7 @@ public class UsuarioControle extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 8;
     }
 
     @Override
@@ -50,6 +50,18 @@ public class UsuarioControle extends AbstractTableModel{
         if(columnIndex == 3){
             return usuario.getJbsCpf();
         }
+        if(columnIndex == 4){
+            return usuario.getJbsDataNasc();
+        }
+        if(columnIndex == 5){
+         return usuario.getJbsAtivo();
+        }
+        if(columnIndex == 6){
+         return usuario.getJbsSenha();
+        }
+        if(columnIndex == 7){
+         return usuario.getJbsNivel();
+        }
         return "";
     }
     
@@ -66,6 +78,18 @@ public class UsuarioControle extends AbstractTableModel{
         }
         if(column == 3){
             return "cpf";
+        }
+        if(column == 4){
+            return "Data";
+        }
+        if(column == 5){
+            return "Ativo";
+        }
+        if(column == 6){
+            return "Senha";
+        }
+        if(column == 7){
+            return "Nivel";
         }
         return "";
     }

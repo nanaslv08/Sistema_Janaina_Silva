@@ -8,6 +8,7 @@ package dao;
 import bean.JbsCliente;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -58,6 +59,36 @@ public class ClienteDAO extends DaoAbstract{
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;    
+    }
+    
+    public List listNome(String nome){
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JbsCliente.class);
+//        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
+        criteria.add(Restrictions.like("jbsNome", nome, MatchMode.ANYWHERE));
+        List lista = criteria.list();;
+        session.getTransaction().commit();
+        return lista;        
+    }
+    
+    public List listcpf(String cpf){
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JbsCliente.class);
+//        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
+        criteria.add(Restrictions.like("jbsCpf", cpf, MatchMode.ANYWHERE));
+        List lista = criteria.list();;
+        session.getTransaction().commit();
+        return lista;        
+    }
+    public List listCpfNome(String cpf, String nome){
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JbsCliente.class);
+//        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
+        criteria.add(Restrictions.like("jbsCpf", cpf, MatchMode.ANYWHERE));
+        criteria.add(Restrictions.like("jbsNome", nome, MatchMode.ANYWHERE));
+        List lista = criteria.list();;
+        session.getTransaction().commit();
+        return lista;        
     }
     
 }
