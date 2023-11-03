@@ -1,5 +1,5 @@
 package bean;
-// Generated 12/09/2023 09:26:38 by Hibernate Tools 4.3.1
+// Generated 30/10/2023 10:00:06 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -30,22 +30,23 @@ public class JbsCliente  implements java.io.Serializable {
      private String jbsRg;
      private Date jbsDataNasc;
      private String jbsCelular;
-     private String jbsGenero;
+     private int jbsGenero;
      private String jbsEmail;
      private String jbsNaturalidade;
      private String jbsRua;
      private String jbsBairro;
      private String jbsNumcasa;
      private String jbsCidade;
-     private String jbsEstado;
+     private int jbsEstado;
      private String jbsCep;
-     //private Set jbsVendas = new HashSet(0);
+//     private Set pedidoses = new HashSet(0);
+//     private Set jbsVendas = new HashSet(0);
 
     public JbsCliente() {
     }
 
 	
-    public JbsCliente(int jbsIdCliente, String jbsNome, String jbsCpf, String jbsRg, Date jbsDataNasc, String jbsCelular, String jbsGenero, String jbsEmail, String jbsNaturalidade, String jbsRua, String jbsBairro, String jbsNumcasa, String jbsCidade, String jbsEstado, String jbsCep) {
+    public JbsCliente(int jbsIdCliente, String jbsNome, String jbsCpf, String jbsRg, Date jbsDataNasc, String jbsCelular, int jbsGenero, String jbsEmail, String jbsNaturalidade, String jbsRua, String jbsBairro, String jbsNumcasa, String jbsCidade, int jbsEstado, String jbsCep) {
         this.jbsIdCliente = jbsIdCliente;
         this.jbsNome = jbsNome;
         this.jbsCpf = jbsCpf;
@@ -62,7 +63,7 @@ public class JbsCliente  implements java.io.Serializable {
         this.jbsEstado = jbsEstado;
         this.jbsCep = jbsCep;
     }
-//    public JbsCliente(int jbsIdCliente, String jbsNome, String jbsCpf, String jbsRg, Date jbsDataNasc, String jbsCelular, String jbsGenero, String jbsEmail, String jbsNaturalidade, String jbsRua, String jbsBairro, String jbsNumcasa, String jbsCidade, String jbsEstado, String jbsCep, Set jbsVendas) {
+//    public JbsCliente(int jbsIdCliente, String jbsNome, String jbsCpf, String jbsRg, Date jbsDataNasc, String jbsCelular, String jbsGenero, String jbsEmail, String jbsNaturalidade, String jbsRua, String jbsBairro, String jbsNumcasa, String jbsCidade, String jbsEstado, String jbsCep, Set pedidoses, Set jbsVendas) {
 //       this.jbsIdCliente = jbsIdCliente;
 //       this.jbsNome = jbsNome;
 //       this.jbsCpf = jbsCpf;
@@ -78,7 +79,8 @@ public class JbsCliente  implements java.io.Serializable {
 //       this.jbsCidade = jbsCidade;
 //       this.jbsEstado = jbsEstado;
 //       this.jbsCep = jbsCep;
-//       //this.jbsVendas = jbsVendas;
+//       this.pedidoses = pedidoses;
+//       this.jbsVendas = jbsVendas;
 //    }
    
      @Id 
@@ -144,12 +146,12 @@ public class JbsCliente  implements java.io.Serializable {
     }
 
     
-    @Column(name="jbs_genero", nullable=false, length=1)
-    public String getJbsGenero() {
+    @Column(name="jbs_genero", nullable=false)
+    public int getJbsGenero() {
         return this.jbsGenero;
     }
     
-    public void setJbsGenero(String jbsGenero) {
+    public void setJbsGenero(int jbsGenero) {
         this.jbsGenero = jbsGenero;
     }
 
@@ -214,12 +216,12 @@ public class JbsCliente  implements java.io.Serializable {
     }
 
     
-    @Column(name="jbs_estado", nullable=false, length=2)
-    public String getJbsEstado() {
+    @Column(name="jbs_estado", nullable=false)
+    public int getJbsEstado() {
         return this.jbsEstado;
     }
     
-    public void setJbsEstado(String jbsEstado) {
+    public void setJbsEstado(int jbsEstado) {
         this.jbsEstado = jbsEstado;
     }
 
@@ -234,10 +236,19 @@ public class JbsCliente  implements java.io.Serializable {
     }
 
 //@OneToMany(fetch=FetchType.LAZY, mappedBy="jbsCliente")
+//    public Set getPedidoses() {
+//        return this.pedidoses;
+//    }
+    
+//    public void setPedidoses(Set pedidoses) {
+//        this.pedidoses = pedidoses;
+//    }
+
+//@OneToMany(fetch=FetchType.LAZY, mappedBy="jbsCliente")
 //    public Set getJbsVendas() {
 //        return this.jbsVendas;
 //    }
-//    
+    
 //    public void setJbsVendas(Set jbsVendas) {
 //        this.jbsVendas = jbsVendas;
 //    }

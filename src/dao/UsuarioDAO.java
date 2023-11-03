@@ -66,7 +66,7 @@ public class UsuarioDAO extends DaoAbstract{
         Criteria criteria = session.createCriteria(JbsUsuario.class);
 //        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
         criteria.add(Restrictions.like("jbsNome", nome, MatchMode.ANYWHERE));
-        List lista = criteria.list();;
+        List lista = criteria.list();
         session.getTransaction().commit();
         return lista;        
     }
@@ -76,7 +76,7 @@ public class UsuarioDAO extends DaoAbstract{
         Criteria criteria = session.createCriteria(JbsUsuario.class);
 //        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
         criteria.add(Restrictions.like("jbsCpf", cpf, MatchMode.ANYWHERE));
-        List lista = criteria.list();;
+        List lista = criteria.list();
         session.getTransaction().commit();
         return lista;        
     }
@@ -86,7 +86,7 @@ public class UsuarioDAO extends DaoAbstract{
 //        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
         criteria.add(Restrictions.like("jbsCpf", cpf, MatchMode.ANYWHERE));
         criteria.add(Restrictions.like("jbsNome", nome, MatchMode.ANYWHERE));
-        List lista = criteria.list();;
+        List lista = criteria.list();
         session.getTransaction().commit();
         return lista;        
     }

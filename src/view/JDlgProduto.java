@@ -121,6 +121,8 @@ public class JDlgProduto extends javax.swing.JDialog {
         jDlgProdutoIA.setTitle("Inclusão");
         jDlgProdutoIA.TelaAnterior(this);
         jDlgProdutoIA.setVisible(true);
+        List lista = produtoDAO.listAll();
+        produtoControle.setList(lista);
         
     }//GEN-LAST:event_JBS_jBtnIncluirActionPerformed
 

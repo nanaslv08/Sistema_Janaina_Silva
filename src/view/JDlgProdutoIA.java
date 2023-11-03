@@ -50,7 +50,7 @@ public class JDlgProdutoIA extends javax.swing.JDialog {
     //COLOCAR O VIEW BEAN AQUI E O BEAN VIEW TAMBÉM 
     public void Limpar(){
         util.limparCampos(JBS_jFmtValor, 
-                JBS_jTxtCategoria,
+                JBS_jCboCategoria,
                 JBS_jTxtCodigo,
                 JBS_jTxtEspecificacoes,
                 JBS_jTxtNome
@@ -63,7 +63,7 @@ public class JDlgProdutoIA extends javax.swing.JDialog {
         jbsProduto.setJbsNome(JBS_jTxtNome.getText());
         double valor = Double.parseDouble(JBS_jFmtValor.getText());
         jbsProduto.setJbsValor(valor);
-        jbsProduto.setJbsCategoria(JBS_jTxtCategoria.getText());
+        jbsProduto.setJbsCategoria(JBS_jCboCategoria.getSelectedIndex());
         jbsProduto.setJbsEspecifica(JBS_jTxtEspecificacoes.getText());
         return jbsProduto;
     }
@@ -73,7 +73,7 @@ public class JDlgProdutoIA extends javax.swing.JDialog {
         JBS_jTxtCodigo.setText(valor);
         JBS_jTxtNome.setText(jbsProduto.getJbsNome());
         JBS_jFmtValor.setText(String.valueOf(jbsProduto.getJbsValor()));
-        JBS_jTxtCategoria.setText(jbsProduto.getJbsCategoria());
+        JBS_jCboCategoria.setSelectedIndex(jbsProduto.getJbsCategoria());
         JBS_jTxtEspecificacoes.setText(jbsProduto.getJbsEspecifica());
     }
     
@@ -96,13 +96,13 @@ public class JDlgProdutoIA extends javax.swing.JDialog {
         JBS_jTxtCodigo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         JBS_jTxtNome = new javax.swing.JTextField();
-        JBS_jTxtCategoria = new javax.swing.JTextField();
         JBS_jTxtEspecificacoes = new javax.swing.JTextField();
         JBS_jFmtValor = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         JBS_jBtnOK = new javax.swing.JButton();
         JBS_jBtnCancelar = new javax.swing.JButton();
+        JBS_jCboCategoria = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -147,6 +147,8 @@ public class JDlgProdutoIA extends javax.swing.JDialog {
         });
         jPanel1.add(JBS_jBtnCancelar);
 
+        JBS_jCboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Feminino", "Masculino", "Unisex" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -167,8 +169,8 @@ public class JDlgProdutoIA extends javax.swing.JDialog {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel4))
-                    .addComponent(JBS_jTxtCategoria)
-                    .addComponent(JBS_jTxtEspecificacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JBS_jTxtEspecificacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                    .addComponent(JBS_jCboCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(85, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -184,7 +186,7 @@ public class JDlgProdutoIA extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(JBS_jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(JBS_jTxtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(JBS_jCboCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -281,8 +283,8 @@ public class JDlgProdutoIA extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBS_jBtnCancelar;
     private javax.swing.JButton JBS_jBtnOK;
+    private javax.swing.JComboBox<String> JBS_jCboCategoria;
     private javax.swing.JFormattedTextField JBS_jFmtValor;
-    private javax.swing.JTextField JBS_jTxtCategoria;
     private javax.swing.JTextField JBS_jTxtCodigo;
     private javax.swing.JTextField JBS_jTxtEspecificacoes;
     private javax.swing.JTextField JBS_jTxtNome;

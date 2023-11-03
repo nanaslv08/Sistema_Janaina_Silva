@@ -46,11 +46,14 @@ Contributor(s):
 <!--    <property name="hibernate.connection.url">jdbc:mysql://10.7.0.51:33062/db_janaina_silva?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">janaina_silva</property>
     <property name="hibernate.connection.password">janaina_silva</property>-->
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_janaina_silva?zeroDateTimeBehavior=convertToNull</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_janaina_silva?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password"></property>
+ 
+    <mapping class="bean.PedidosProdutos"/>
     <mapping class="bean.JbsVendaProduto"/>
     <mapping class="bean.JbsUsuario"/>
+    <mapping class="bean.Pedidos"/>
     <mapping class="bean.JbsVenda"/>
     <mapping class="bean.JbsCliente"/>
     <mapping class="bean.JbsProduto"/>

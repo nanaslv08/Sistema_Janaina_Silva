@@ -8,6 +8,7 @@ package view;
 import bean.JbsVendedor;
 import dao.VendedorDAO;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.DefaultFormatterFactory;
@@ -54,13 +55,14 @@ public class JDlgVendedorIA extends javax.swing.JDialog {
     }
     
     public void Limpar(){
-        util.limparCampos(JBS_jFmtCPF, 
+        util.limparCampos(
+                JBS_jFmtCPF, 
                 JBS_jFmtCelular,
                 JBS_jFmtDataNasc,
                 JBS_jTxtCodigo,
                 JBS_jTxtEmail,
-                JBS_jTxtEstado,
-                JBS_jTxtGenero,
+                JBS_jCboEstado,
+                JBS_jCboGenero,
                 JBS_jTxtNome
         );
     }
@@ -73,9 +75,15 @@ public class JDlgVendedorIA extends javax.swing.JDialog {
         jbsVendedor.setJbsEmail(JBS_jTxtEmail.getText());
         jbsVendedor.setJbsCelular(JBS_jFmtCelular.getText());
         jbsVendedor.setJbsCpf(JBS_jFmtCPF.getText());
-        //vendedor.setData_Nasc(jFmtDataNasc.gteText());
-        jbsVendedor.setJbsEstado(JBS_jTxtEstado.getText());
-        jbsVendedor.setJbsGenero(JBS_jTxtGenero.getText());
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            jbsVendedor.setJbsDataNasc(formato.parse(JBS_jFmtDataNasc.getText()));
+        } catch (ParseException ex) {
+            //Logger.getLogger(JDlgVendas.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.print("por favor funciona: " + ex.getMessage());
+        }         
+        jbsVendedor.setJbsEstado(JBS_jCboEstado.getSelectedIndex());
+        jbsVendedor.setJbsGenero(JBS_jCboEstado.getSelectedIndex());
         return jbsVendedor;
     }
     
@@ -86,9 +94,11 @@ public class JDlgVendedorIA extends javax.swing.JDialog {
         JBS_jTxtEmail.setText(jbsVendedor.getJbsEmail());
         JBS_jFmtCelular.setText(jbsVendedor.getJbsCelular());
         JBS_jFmtCPF.setText(jbsVendedor.getJbsCpf());
-//        jFmtDataNasc.setText(vendedor.getData_nasc());
-        JBS_jTxtEstado.setText(jbsVendedor.getJbsEstado());
-        JBS_jTxtGenero.setText(jbsVendedor.getJbsGenero());
+        JBS_jCboEstado.setSelectedIndex(jbsVendedor.getJbsEstado());
+        JBS_jCboGenero.setSelectedIndex(jbsVendedor.getJbsGenero());
+                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+//        String dataStr = formato.format();
+        JBS_jFmtDataNasc.setText(formato.format(jbsVendedor.getJbsDataNasc()));
     }
     
     public void TelaAnterior(JDlgVendedor jDlgVendedor){
@@ -104,7 +114,6 @@ public class JDlgVendedorIA extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        JBS_jTxtGenero = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         JBS_jTxtNome = new javax.swing.JTextField();
@@ -116,13 +125,14 @@ public class JDlgVendedorIA extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         JBS_jFmtDataNasc = new javax.swing.JFormattedTextField();
         jLabel2 = new javax.swing.JLabel();
-        JBS_jTxtEstado = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         JBS_jBtnOK = new javax.swing.JButton();
         JBS_jBtnCancelar = new javax.swing.JButton();
+        JBS_jCboGenero = new javax.swing.JComboBox<>();
+        JBS_jCboEstado = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -173,6 +183,10 @@ public class JDlgVendedorIA extends javax.swing.JDialog {
         });
         jPanel1.add(JBS_jBtnCancelar);
 
+        JBS_jCboGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "M", "N " }));
+
+        JBS_jCboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MS", "AC", "AM", "MT", "RS", "RJ", "SP", "SC" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -189,30 +203,27 @@ public class JDlgVendedorIA extends javax.swing.JDialog {
                         .addComponent(JBS_jTxtNome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JBS_jTxtEstado)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(JBS_jFmtDataNasc, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(JBS_jFmtCPF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                                .addComponent(jLabel7)
-                                .addGap(40, 40, 40))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(JBS_jTxtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
-                            .addComponent(JBS_jTxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(157, 157, 157))
+                            .addComponent(JBS_jTxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(157, 157, 157))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(JBS_jCboEstado, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(JBS_jFmtDataNasc, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(JBS_jFmtCPF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel6)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(JBS_jCboGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(148, 148, 148))))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -241,15 +252,15 @@ public class JDlgVendedorIA extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBS_jTxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JBS_jFmtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JBS_jTxtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JBS_jCboGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBS_jFmtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JBS_jTxtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JBS_jCboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -335,13 +346,13 @@ public class JDlgVendedorIA extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBS_jBtnCancelar;
     private javax.swing.JButton JBS_jBtnOK;
+    private javax.swing.JComboBox<String> JBS_jCboEstado;
+    private javax.swing.JComboBox<String> JBS_jCboGenero;
     private javax.swing.JFormattedTextField JBS_jFmtCPF;
     private javax.swing.JFormattedTextField JBS_jFmtCelular;
     private javax.swing.JFormattedTextField JBS_jFmtDataNasc;
     private javax.swing.JTextField JBS_jTxtCodigo;
     private javax.swing.JTextField JBS_jTxtEmail;
-    private javax.swing.JTextField JBS_jTxtEstado;
-    private javax.swing.JTextField JBS_jTxtGenero;
     private javax.swing.JTextField JBS_jTxtNome;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

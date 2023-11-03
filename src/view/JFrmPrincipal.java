@@ -40,6 +40,10 @@ public class JFrmPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jToolBar1 = new javax.swing.JToolBar();
+        JBS_jBtnCliente2 = new javax.swing.JButton();
+        JBS_jBtnProdutos2 = new javax.swing.JButton();
+        JBS_jBtnSair2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMnuPrincipal = new javax.swing.JMenu();
         jMnuClientes = new javax.swing.JMenuItem();
@@ -65,11 +69,47 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fundo_sistema.png"))); // NOI18N
         jLabel1.setText("jLabel1");
 
+        jToolBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jToolBar1.setRollover(true);
+
+        JBS_jBtnCliente2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-jake-16.png"))); // NOI18N
+        JBS_jBtnCliente2.setFocusable(false);
+        JBS_jBtnCliente2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        JBS_jBtnCliente2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        JBS_jBtnCliente2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBS_jBtnCliente2ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(JBS_jBtnCliente2);
+
+        JBS_jBtnProdutos2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-produto-16.png"))); // NOI18N
+        JBS_jBtnProdutos2.setFocusable(false);
+        JBS_jBtnProdutos2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        JBS_jBtnProdutos2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        JBS_jBtnProdutos2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBS_jBtnProdutos2ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(JBS_jBtnProdutos2);
+
+        JBS_jBtnSair2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-sair-20.png"))); // NOI18N
+        JBS_jBtnSair2.setFocusable(false);
+        JBS_jBtnSair2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        JBS_jBtnSair2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        JBS_jBtnSair2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBS_jBtnSair2ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(JBS_jBtnSair2);
+
         jMnuPrincipal.setMnemonic('P');
         jMnuPrincipal.setText("Principal");
 
         jMnuClientes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
-        jMnuClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-gestão-de-cliente-16.png"))); // NOI18N
+        jMnuClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-jake-16.png"))); // NOI18N
         jMnuClientes.setMnemonic('C');
         jMnuClientes.setText("Cliente");
         jMnuClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +120,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jMnuPrincipal.add(jMnuClientes);
 
         jMnuUsuarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
-        jMnuUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-jake-16.png"))); // NOI18N
+        jMnuUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-gestão-de-cliente-16.png"))); // NOI18N
         jMnuUsuarios.setMnemonic('U');
         jMnuUsuarios.setText("Usuários");
         jMnuUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -112,7 +152,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jMnuPrincipal.add(jSeparator1);
 
         jMnuSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
-        jMnuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/exit_1.png"))); // NOI18N
+        jMnuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-sair-20.png"))); // NOI18N
         jMnuSair.setMnemonic('S');
         jMnuSair.setText("Sair");
         jMnuSair.addActionListener(new java.awt.event.ActionListener() {
@@ -193,14 +233,17 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 2045, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 10, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 918, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -272,6 +315,24 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jDlgConsultaCliente.setVisible(true);
     }//GEN-LAST:event_jMnuConClienteActionPerformed
 
+    private void JBS_jBtnSair2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnSair2ActionPerformed
+        // TODO add your handling code here:
+                System.exit(0);
+
+    }//GEN-LAST:event_JBS_jBtnSair2ActionPerformed
+
+    private void JBS_jBtnProdutos2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnProdutos2ActionPerformed
+        // TODO add your handling code here:
+        JDlgProduto  jDlgProduto = new JDlgProduto(null, true);
+        jDlgProduto.setVisible(true);
+    }//GEN-LAST:event_JBS_jBtnProdutos2ActionPerformed
+
+    private void JBS_jBtnCliente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnCliente2ActionPerformed
+        // TODO add your handling code here:
+        JDlgCliente  jDlgCliente = new JDlgCliente(null, true);
+        jDlgCliente.setVisible(true);
+    }//GEN-LAST:event_JBS_jBtnCliente2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -309,6 +370,9 @@ public class JFrmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBS_jBtnCliente2;
+    private javax.swing.JButton JBS_jBtnProdutos2;
+    private javax.swing.JButton JBS_jBtnSair2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
@@ -327,5 +391,6 @@ public class JFrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMnuVendedor;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }

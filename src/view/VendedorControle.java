@@ -18,6 +18,7 @@ public class VendedorControle extends AbstractTableModel{
     
     public void setList(List lista){
         this.lista = lista;
+        this.fireTableDataChanged();
     }
     
     public JbsVendedor getBean(int row){

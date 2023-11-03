@@ -1,5 +1,5 @@
 package bean;
-// Generated 12/09/2023 09:26:38 by Hibernate Tools 4.3.1
+// Generated 30/10/2023 10:00:06 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -124,6 +124,9 @@ public class JbsUsuario  implements java.io.Serializable {
     public void setJbsAtivo(String jbsAtivo) {
         this.jbsAtivo = jbsAtivo;
     }
+
+
+
 
 }
 

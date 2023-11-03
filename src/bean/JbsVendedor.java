@@ -1,5 +1,5 @@
 package bean;
-// Generated 12/09/2023 09:26:38 by Hibernate Tools 4.3.1
+// Generated 30/10/2023 10:00:06 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -30,15 +30,16 @@ public class JbsVendedor  implements java.io.Serializable {
      private String jbsEmail;
      private String jbsCelular;
      private Date jbsDataNasc;
-     private String jbsEstado;
-     private String jbsGenero;
+     private int jbsEstado;
+     private int jbsGenero;
+//     private Set pedidoses = new HashSet(0);
 //     private Set jbsVendas = new HashSet(0);
 
     public JbsVendedor() {
     }
 
 	
-    public JbsVendedor(int jbsIdVendedor, String jbsNome, String jbsCpf, String jbsEmail, String jbsCelular, Date jbsDataNasc, String jbsEstado, String jbsGenero) {
+    public JbsVendedor(int jbsIdVendedor, String jbsNome, String jbsCpf, String jbsEmail, String jbsCelular, Date jbsDataNasc, int jbsEstado, int jbsGenero) {
         this.jbsIdVendedor = jbsIdVendedor;
         this.jbsNome = jbsNome;
         this.jbsCpf = jbsCpf;
@@ -48,7 +49,7 @@ public class JbsVendedor  implements java.io.Serializable {
         this.jbsEstado = jbsEstado;
         this.jbsGenero = jbsGenero;
     }
-//    public JbsVendedor(int jbsIdVendedor, String jbsNome, String jbsCpf, String jbsEmail, String jbsCelular, Date jbsDataNasc, String jbsEstado, char jbsGenero, Set jbsVendas) {
+//    public JbsVendedor(int jbsIdVendedor, String jbsNome, String jbsCpf, String jbsEmail, String jbsCelular, Date jbsDataNasc, String jbsEstado, String jbsGenero, Set pedidoses, Set jbsVendas) {
 //       this.jbsIdVendedor = jbsIdVendedor;
 //       this.jbsNome = jbsNome;
 //       this.jbsCpf = jbsCpf;
@@ -57,6 +58,7 @@ public class JbsVendedor  implements java.io.Serializable {
 //       this.jbsDataNasc = jbsDataNasc;
 //       this.jbsEstado = jbsEstado;
 //       this.jbsGenero = jbsGenero;
+//       this.pedidoses = pedidoses;
 //       this.jbsVendas = jbsVendas;
 //    }
    
@@ -123,25 +125,34 @@ public class JbsVendedor  implements java.io.Serializable {
     }
 
     
-    @Column(name="jbs_estado", nullable=false, length=2)
-    public String getJbsEstado() {
+    @Column(name="jbs_estado", nullable=false)
+    public int getJbsEstado() {
         return this.jbsEstado;
     }
     
-    public void setJbsEstado(String jbsEstado) {
+    public void setJbsEstado(int jbsEstado) {
         this.jbsEstado = jbsEstado;
     }
 
     
-    @Column(name="jbs_genero", nullable=false, length=1)
-    public String getJbsGenero() {
+    @Column(name="jbs_genero", nullable=false)
+    public int getJbsGenero() {
         return this.jbsGenero;
     }
     
-    public void setJbsGenero(String jbsGenero) {
+    public void setJbsGenero(int jbsGenero) {
         this.jbsGenero = jbsGenero;
     }
 
+//@OneToMany(fetch=FetchType.LAZY, mappedBy="jbsVendedor")
+//    public Set getPedidoses() {
+//        return this.pedidoses;
+//    }
+//    
+//    public void setPedidoses(Set pedidoses) {
+//        this.pedidoses = pedidoses;
+//    }
+//
 //@OneToMany(fetch=FetchType.LAZY, mappedBy="jbsVendedor")
 //    public Set getJbsVendas() {
 //        return this.jbsVendas;

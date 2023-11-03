@@ -26,7 +26,7 @@
           <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="601" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -58,17 +58,19 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
+                      <Component id="JBS_jTxtNome" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
+                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="JBS_jTxtNome" min="-2" pref="175" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="JBS_jTxtCPF" min="-2" pref="195" max="-2" attributes="0"/>
-                          <EmptySpace pref="142" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                          <Component id="JBS_jFmtData" min="-2" pref="158" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="JBS_jBtnConsultar" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -87,7 +89,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="JBS_jTxtNome" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="JBS_jBtnConsultar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="JBS_jTxtCPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="JBS_jFmtData" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="15" max="32767" attributes="0"/>
               </Group>
@@ -112,10 +114,10 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="CPF"/>
+            <Property name="text" type="java.lang.String" value="Data - igual"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="JBS_jTxtCPF">
+        <Component class="javax.swing.JFormattedTextField" name="JBS_jFmtData">
         </Component>
       </SubComponents>
     </Container>

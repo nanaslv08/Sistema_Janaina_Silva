@@ -48,7 +48,7 @@ public class ClienteControle extends AbstractTableModel{
             return cliente.getJbsCpf();
         }
         if(columnIndex == 3){
-            return cliente.getJbsCelular();
+            return cliente.getJbsDataNasc();
         }
         return "";
     }
@@ -65,7 +65,7 @@ public class ClienteControle extends AbstractTableModel{
             return "cpf";
         }
         if(column == 3){
-            return "celular";
+            return "datanasc";
         }
         return "";
     }

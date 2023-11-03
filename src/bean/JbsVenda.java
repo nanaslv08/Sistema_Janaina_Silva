@@ -1,5 +1,5 @@
 package bean;
-// Generated 12/09/2023 09:26:38 by Hibernate Tools 4.3.1
+// Generated 30/10/2023 10:00:06 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -45,7 +45,7 @@ public class JbsVenda  implements java.io.Serializable {
         this.jbsData = jbsData;
         this.jbsTotal = jbsTotal;
     }
-//    public JbsVenda(int jbsIdVenda, JbsCliente jbsCliente, JbsVendedor jbsVendedor, Date jbsData, double jbsTotal) {
+//    public JbsVenda(int jbsIdVenda, JbsCliente jbsCliente, JbsVendedor jbsVendedor, Date jbsData, BigDecimal jbsTotal, Set jbsVendaProdutos) {
 //       this.jbsIdVenda = jbsIdVenda;
 //       this.jbsCliente = jbsCliente;
 //       this.jbsVendedor = jbsVendedor;

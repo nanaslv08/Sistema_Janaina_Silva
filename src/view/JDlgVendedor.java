@@ -37,6 +37,8 @@ public class JDlgVendedor extends javax.swing.JDialog {
         vendedorControle.setList(lista);
         jTable1.setModel(vendedorControle);
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -119,6 +121,8 @@ public class JDlgVendedor extends javax.swing.JDialog {
         jDlgVendedorIA.setTitle("Inclusão");
         jDlgVendedorIA.TelaAnterior(this);
         jDlgVendedorIA.setVisible(true);
+        List lista = vendedorDAO.listAll();
+        vendedorControle.setList(lista);
     }//GEN-LAST:event_JBS_jBtnIncluirActionPerformed
 
     private void JBS_jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnAlterarActionPerformed

@@ -6,6 +6,7 @@
 package dao;
 
 import bean.JbsCliente;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.MatchMode;
@@ -46,7 +47,7 @@ public class ClienteDAO extends DaoAbstract{
     public Object list(int id) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(JbsCliente.class);
-        criteria.add(Restrictions.eq("idcliente", id)); //método estático - eq = equals = igual
+        criteria.add(Restrictions.eq("jbsIdCliente", id)); //método estático - eq = equals = igual
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;    
@@ -66,27 +67,27 @@ public class ClienteDAO extends DaoAbstract{
         Criteria criteria = session.createCriteria(JbsCliente.class);
 //        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
         criteria.add(Restrictions.like("jbsNome", nome, MatchMode.ANYWHERE));
-        List lista = criteria.list();;
+        List lista = criteria.list();
         session.getTransaction().commit();
         return lista;        
     }
     
-    public List listcpf(String cpf){
+    public List listData(Date data){
         session.beginTransaction();
         Criteria criteria = session.createCriteria(JbsCliente.class);
 //        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
-        criteria.add(Restrictions.like("jbsCpf", cpf, MatchMode.ANYWHERE));
-        List lista = criteria.list();;
+        criteria.add(Restrictions.eq("jbsDataNasc", data));
+        List lista = criteria.list();
         session.getTransaction().commit();
         return lista;        
     }
-    public List listCpfNome(String cpf, String nome){
+    public List listDataNome(Date data, String nome){
         session.beginTransaction();
         Criteria criteria = session.createCriteria(JbsCliente.class);
 //        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
-        criteria.add(Restrictions.like("jbsCpf", cpf, MatchMode.ANYWHERE));
-        criteria.add(Restrictions.like("jbsNome", nome, MatchMode.ANYWHERE));
-        List lista = criteria.list();;
+        criteria.add(Restrictions.eq("jbsDataNasc", data));
+        criteria.add(Restrictions.like("jbsNome", nome));
+        List lista = criteria.list();
         session.getTransaction().commit();
         return lista;        
     }

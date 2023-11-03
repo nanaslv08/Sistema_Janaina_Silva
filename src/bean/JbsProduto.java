@@ -1,5 +1,5 @@
 package bean;
-// Generated 12/09/2023 09:26:38 by Hibernate Tools 4.3.1
+// Generated 30/10/2023 10:00:06 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -25,27 +25,29 @@ public class JbsProduto  implements java.io.Serializable {
      private int jbsIdProduto;
      private String jbsNome;
      private double jbsValor;
-     private String jbsCategoria;
+     private int jbsCategoria;
      private String jbsEspecifica;
+//     private Set pedidosProdutoses = new HashSet(0);
 //     private Set jbsVendaProdutos = new HashSet(0);
 
     public JbsProduto() {
     }
 
 	
-    public JbsProduto(int jbsIdProduto, String jbsNome, double jbsValor, String jbsCategoria, String jbsEspecifica) {
+    public JbsProduto(int jbsIdProduto, String jbsNome, double jbsValor, int jbsCategoria, String jbsEspecifica) {
         this.jbsIdProduto = jbsIdProduto;
         this.jbsNome = jbsNome;
         this.jbsValor = jbsValor;
         this.jbsCategoria = jbsCategoria;
         this.jbsEspecifica = jbsEspecifica;
     }
-//    public JbsProduto(int jbsIdProduto, String jbsNome, double jbsValor, String jbsCategoria, String jbsEspecifica, Set jbsVendaProdutos) {
+//    public JbsProduto(int jbsIdProduto, String jbsNome, BigDecimal jbsValor, String jbsCategoria, String jbsEspecifica, Set pedidosProdutoses, Set jbsVendaProdutos) {
 //       this.jbsIdProduto = jbsIdProduto;
 //       this.jbsNome = jbsNome;
 //       this.jbsValor = jbsValor;
 //       this.jbsCategoria = jbsCategoria;
 //       this.jbsEspecifica = jbsEspecifica;
+//       this.pedidosProdutoses = pedidosProdutoses;
 //       this.jbsVendaProdutos = jbsVendaProdutos;
 //    }
    
@@ -82,12 +84,12 @@ public class JbsProduto  implements java.io.Serializable {
     }
 
     
-    @Column(name="jbs_categoria", nullable=false, length=100)
-    public String getJbsCategoria() {
+    @Column(name="jbs_categoria", nullable=false)
+    public int getJbsCategoria() {
         return this.jbsCategoria;
     }
     
-    public void setJbsCategoria(String jbsCategoria) {
+    public void setJbsCategoria(int jbsCategoria) {
         this.jbsCategoria = jbsCategoria;
     }
 
@@ -101,6 +103,15 @@ public class JbsProduto  implements java.io.Serializable {
         this.jbsEspecifica = jbsEspecifica;
     }
 
+//@OneToMany(fetch=FetchType.LAZY, mappedBy="jbsProduto")
+//    public Set getPedidosProdutoses() {
+//        return this.pedidosProdutoses;
+//    }
+//    
+//    public void setPedidosProdutoses(Set pedidosProdutoses) {
+//        this.pedidosProdutoses = pedidosProdutoses;
+//    }
+//
 //@OneToMany(fetch=FetchType.LAZY, mappedBy="jbsProduto")
 //    public Set getJbsVendaProdutos() {
 //        return this.jbsVendaProdutos;

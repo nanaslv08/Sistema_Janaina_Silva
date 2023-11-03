@@ -5,6 +5,8 @@
  */
 package view;
 
+import tools.Util;
+
 /**
  *
  * @author Janaína B da Silva
@@ -27,9 +29,9 @@ public class JFrmLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tksl_jTxtUsuario = new javax.swing.JTextField();
+        JBS_jTxtUsuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        tksl_jPswSenha = new javax.swing.JPasswordField();
+        JBS_jPwfSenha = new javax.swing.JPasswordField();
         JBS_jBtnLogin = new javax.swing.JButton();
         JBS_jBtnCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -65,8 +67,8 @@ public class JFrmLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(tksl_jPswSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
-                    .addComponent(tksl_jTxtUsuario))
+                    .addComponent(JBS_jPwfSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
+                    .addComponent(JBS_jTxtUsuario))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(157, Short.MAX_VALUE)
@@ -81,11 +83,11 @@ public class JFrmLogin extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tksl_jTxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JBS_jTxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tksl_jPswSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JBS_jPwfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(JBS_jBtnCancelar)
@@ -98,6 +100,15 @@ public class JFrmLogin extends javax.swing.JFrame {
 
     private void JBS_jBtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnLoginActionPerformed
 
+        if (JBS_jPwfSenha.getText().equalsIgnoreCase("admin") && JBS_jTxtUsuario.getText().equalsIgnoreCase("Janaina") 
+                || (JBS_jPwfSenha.getText().equalsIgnoreCase("senha") && !JBS_jTxtUsuario.getText().equalsIgnoreCase("Nana"))) {
+            JFrmPrincipal jFrmPrincipal = new JFrmPrincipal();
+            jFrmPrincipal.setVisible(true);
+            this.dispose();
+            Util.mensagem("Acesso Permitido");
+        } else {
+            Util.mensagem("Não sabe a senha né?");
+        }
     }//GEN-LAST:event_JBS_jBtnLoginActionPerformed
 
     private void JBS_jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnCancelarActionPerformed
@@ -143,9 +154,9 @@ public class JFrmLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBS_jBtnCancelar;
     private javax.swing.JButton JBS_jBtnLogin;
+    private javax.swing.JPasswordField JBS_jPwfSenha;
+    private javax.swing.JTextField JBS_jTxtUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField tksl_jPswSenha;
-    private javax.swing.JTextField tksl_jTxtUsuario;
     // End of variables declaration//GEN-END:variables
 }

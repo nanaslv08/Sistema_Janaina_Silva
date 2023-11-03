@@ -1,5 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
+  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -149,24 +149,18 @@ public class JDlgConsultaUsuario extends javax.swing.JDialog {
         // TODO add your handling code here:
         
         if(JBS_jTxtNome.getText().equals("") && JBS_jTxtCPF.getText().equals("")){
-        List lista = usuarioDAO.listAll();
-        usuarioControle.setList(lista);
-        }else{
-            if(!JBS_jTxtNome.getText().equals("") && !JBS_jTxtCPF.getText().equals("")){
-            List lista = usuarioDAO.listCpfNome(JBS_jTxtCPF.getText(), JBS_jTxtNome.getText());
-            usuarioControle.setList(lista);
-            }else{
-            if(!JBS_jTxtNome.getText().equals("")){
-            List lista = usuarioDAO.listNome(JBS_jTxtNome.getText());
-            usuarioControle.setList(lista);
-            }else{
-            if(!JBS_jTxtCPF.getText().equals("")){
-            List lista = usuarioDAO.listcpf(JBS_jTxtCPF.getText());
-            usuarioControle.setList(lista);
+        List listaVazia = usuarioDAO.listAll();
+        usuarioControle.setList(listaVazia);
+        }else if(!JBS_jTxtNome.getText().equals("") && !JBS_jTxtCPF.getText().equals("")){
+            List listaCheia = usuarioDAO.listCpfNome(JBS_jTxtCPF.getText(), JBS_jTxtNome.getText());
+            usuarioControle.setList(listaCheia);
+            }else if(!JBS_jTxtNome.getText().equals("")){
+            List listaNome = usuarioDAO.listNome(JBS_jTxtNome.getText());
+            usuarioControle.setList(listaNome);
+            }else if(!JBS_jTxtCPF.getText().equals("")){
+            List listaCpf = usuarioDAO.listcpf(JBS_jTxtCPF.getText());
+            usuarioControle.setList(listaCpf);
             }
-            }
-            }
-        }
 
         
         
