@@ -6,7 +6,13 @@
 package query;
 
 import dao.ProdutoDAO;
+import java.text.ParseException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
+import tools.Util;
 import view.ProdutoControle;
 
 /**
@@ -17,6 +23,7 @@ public class JDlgConsultaProduto extends javax.swing.JDialog {
 
     private ProdutoControle produtoControle;
     ProdutoDAO produtoDAO;
+    MaskFormatter mascaraValor;
     /**
      * Creates new form JDlgConsultaProduto
      */
@@ -30,6 +37,12 @@ public class JDlgConsultaProduto extends javax.swing.JDialog {
         List lista = produtoDAO.listAll();
         produtoControle.setList(lista);
         jTable.setModel(produtoControle);
+        try {
+            mascaraValor = new MaskFormatter("###.##");
+        } catch (ParseException ex) {
+            Logger.getLogger(JDlgConsultaProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JBS_jFmtValor.setFormatterFactory(new DefaultFormatterFactory(mascaraValor));
     }
 
     /**
@@ -46,7 +59,7 @@ public class JDlgConsultaProduto extends javax.swing.JDialog {
         JBS_jTxtNome = new javax.swing.JTextField();
         JBS_jBtnConsultar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        JBS_jTxtEspecifica = new javax.swing.JTextField();
+        JBS_jFmtValor = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
 
@@ -63,7 +76,13 @@ public class JDlgConsultaProduto extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setText("Especifica");
+        jLabel2.setText("Valor - Maior que");
+
+        JBS_jFmtValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBS_jFmtValorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -76,12 +95,12 @@ public class JDlgConsultaProduto extends javax.swing.JDialog {
                         .addComponent(jLabel1)
                         .addGap(161, 161, 161)
                         .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 309, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(JBS_jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JBS_jTxtEspecifica, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                        .addComponent(JBS_jFmtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(JBS_jBtnConsultar)))
                 .addContainerGap())
         );
@@ -95,7 +114,7 @@ public class JDlgConsultaProduto extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBS_jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JBS_jBtnConsultar)
-                    .addComponent(JBS_jTxtEspecifica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JBS_jFmtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 15, Short.MAX_VALUE))
         );
 
@@ -141,20 +160,20 @@ public class JDlgConsultaProduto extends javax.swing.JDialog {
     private void JBS_jBtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnConsultarActionPerformed
         // TODO add your handling code here:
 
-        if(JBS_jTxtNome.getText().equals("") && JBS_jTxtEspecifica.getText().equals("")){
+        if(JBS_jTxtNome.getText().equals("") && JBS_jFmtValor.getText().equals("")){
             List lista = produtoDAO.listAll();
             produtoControle.setList(lista);
         }else{
-            if(!JBS_jTxtNome.getText().equals("") && !JBS_jTxtEspecifica.getText().equals("")){
-                List lista = produtoDAO.listEspecificaNome(JBS_jTxtEspecifica.getText(), JBS_jTxtNome.getText());
+            if(!JBS_jTxtNome.getText().equals("") && !JBS_jFmtValor.getText().equals("")){
+                List lista = produtoDAO.listValorNome(Util.strDouble(JBS_jFmtValor.getText()), JBS_jTxtNome.getText());
                 produtoControle.setList(lista);
             }else{
                 if(!JBS_jTxtNome.getText().equals("")){
                     List lista = produtoDAO.listNome(JBS_jTxtNome.getText());
                     produtoControle.setList(lista);
                 }else{
-                    if(!JBS_jTxtEspecifica.getText().equals("")){
-                        List lista = produtoDAO.listEspecifica(JBS_jTxtEspecifica.getText());
+                    if(!JBS_jFmtValor.getText().equals("")){
+                        List lista = produtoDAO.listValor(Util.strDouble(JBS_jFmtValor.getText()));
                         produtoControle.setList(lista);
                     }
                 }
@@ -162,6 +181,10 @@ public class JDlgConsultaProduto extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_JBS_jBtnConsultarActionPerformed
+
+    private void JBS_jFmtValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jFmtValorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JBS_jFmtValorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,7 +230,7 @@ public class JDlgConsultaProduto extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBS_jBtnConsultar;
-    private javax.swing.JTextField JBS_jTxtEspecifica;
+    private javax.swing.JFormattedTextField JBS_jFmtValor;
     private javax.swing.JTextField JBS_jTxtNome;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

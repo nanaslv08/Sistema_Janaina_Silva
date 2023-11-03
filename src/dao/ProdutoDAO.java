@@ -65,27 +65,27 @@ public class ProdutoDAO extends DaoAbstract{
         Criteria criteria = session.createCriteria(JbsProduto.class);
 //        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
         criteria.add(Restrictions.like("jbsNome", nome, MatchMode.ANYWHERE));
-        List lista = criteria.list();;
+        List lista = criteria.list();
         session.getTransaction().commit();
         return lista;        
     }
     
-    public List listEspecifica(String especifica){
+    public List listValor(double valor){
         session.beginTransaction();
         Criteria criteria = session.createCriteria(JbsProduto.class);
 //        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
-        criteria.add(Restrictions.like("jbsEspecifica", especifica, MatchMode.ANYWHERE));
-        List lista = criteria.list();;
+        criteria.add(Restrictions.gt("jbsValor", valor));
+        List lista = criteria.list();
         session.getTransaction().commit();
         return lista;        
     }
-    public List listEspecificaNome(String especifica, String nome){
+    public List listValorNome(double valor, String nome){
         session.beginTransaction();
         Criteria criteria = session.createCriteria(JbsProduto.class);
 //        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
-        criteria.add(Restrictions.like("jbsEspecifica", especifica, MatchMode.ANYWHERE));
+        criteria.add(Restrictions.gt("jbsValor", valor));
         criteria.add(Restrictions.like("jbsNome", nome, MatchMode.ANYWHERE));
-        List lista = criteria.list();;
+        List lista = criteria.list();
         session.getTransaction().commit();
         return lista;        
     }

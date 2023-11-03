@@ -5,6 +5,7 @@
  */
 package tools;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -60,28 +61,24 @@ public class Util {
     }
     
     public static int strInt(String cad){
-    return Integer.valueOf(cad);
+      return Integer.parseInt(cad);
     }
     public static String intStr(int num){
-    return "";
+    return Integer.toString(num);
     }
     public static double strDouble(String cad){
-    return Double.valueOf(cad);
+        return Double.parseDouble(cad);
     }
     public static String doubleStr(double num){
-    return String.valueOf(num);
+     return Double.toString(num);
     }
-    public static Date strDate(String cad){
-    try {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // ajuste o formato conforme sua necessidade
-        return sdf.parse(cad);
-    } catch (ParseException e) {
-        // Tratamento de erro se a conversão falhar
-        return null;
-    }    }
+    public static Date strDate(String cad)throws ParseException{
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    return dateFormat.parse(cad);
+    }
     public static String dateStr(Date data){
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // ajuste o formato conforme sua necessidade
-    return sdf.format(data);
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    return dateFormat.format(data);
     }
 
 }

@@ -6,12 +6,7 @@
 package query;
 
 import dao.ClienteDAO;
-import java.text.ParseException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.MaskFormatter;
 import tools.Util;
 import view.ClienteControle;
 
@@ -23,7 +18,6 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
 
     private ClienteControle clienteControle;
     ClienteDAO clienteDAO;
-    MaskFormatter mascaraData;
 
     /**
      * Creates new form JDlgConsultaCliente
@@ -38,13 +32,6 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
         List lista = clienteDAO.listAll();
         clienteControle.setList(lista);
         jTable.setModel(clienteControle);
-        try{
-            mascaraData = new MaskFormatter("##/##/####");
-        }catch (ParseException ex) {
-            Logger.getLogger(JDlgConsultaCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                JBS_jFmtData.setFormatterFactory(new DefaultFormatterFactory(mascaraData));
-
     }
 
     /**
@@ -61,7 +48,9 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
         JBS_jTxtNome = new javax.swing.JTextField();
         JBS_jBtnConsultar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        JBS_jFmtData = new javax.swing.JFormattedTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        JBS_jTxtEstado = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
 
@@ -78,7 +67,14 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setText("Data - igual");
+        jLabel2.setText("Estado");
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "0 - MS", "1 - AC", "2 - MT", "3 - RJ", "4 - SP", "5 - AM", "6 - RS", "7 - SC" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(jList1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -91,14 +87,12 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(JBS_jFmtData, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(JBS_jBtnConsultar)))
+                    .addComponent(jLabel2)
+                    .addComponent(JBS_jTxtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
+                .addComponent(JBS_jBtnConsultar)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -111,8 +105,11 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBS_jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JBS_jBtnConsultar)
-                    .addComponent(JBS_jFmtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 15, Short.MAX_VALUE))
+                    .addComponent(JBS_jTxtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
         );
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -142,7 +139,7 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -152,18 +149,18 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
 
     private void JBS_jBtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnConsultarActionPerformed
         // TODO add your handling code here:
-        if(JBS_jTxtNome.getText().equals("") && JBS_jFmtData.getText().equals("")){
+        if(JBS_jTxtNome.getText().equals("") && JBS_jTxtEstado.getText().equals("")){
             List listaVazia = clienteDAO.listAll();
             clienteControle.setList(listaVazia);
-        }else if(!JBS_jTxtNome.getText().equals("") && !JBS_jFmtData.getText().equals("")){
-                List listaCheia = clienteDAO.listDataNome(Util.strDate(JBS_jFmtData.getText()), JBS_jTxtNome.getText());
+        }else if(!JBS_jTxtNome.getText().equals("") && !JBS_jTxtEstado.getText().equals("")){
+                List listaCheia = clienteDAO.listEstadoNome(Util.strInt(JBS_jTxtEstado.getText()), JBS_jTxtNome.getText());
                 clienteControle.setList(listaCheia);
             }else if(!JBS_jTxtNome.getText().equals("")){
                     List listaNome = clienteDAO.listNome(JBS_jTxtNome.getText());
                     clienteControle.setList(listaNome);
-                }else if(!JBS_jFmtData.getText().equals("")){
-                        List listaData = clienteDAO.listData(Util.strDate(JBS_jFmtData.getText()));
-                        clienteControle.setList(listaData);
+                }else if(!JBS_jTxtEstado.getText().equals("")){
+                        List lista = clienteDAO.listEstado(Util.strInt(JBS_jTxtEstado.getText()));
+                        clienteControle.setList(lista);
                     }
         
     }//GEN-LAST:event_JBS_jBtnConsultarActionPerformed
@@ -212,12 +209,14 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBS_jBtnConsultar;
-    private javax.swing.JFormattedTextField JBS_jFmtData;
+    private javax.swing.JTextField JBS_jTxtEstado;
     private javax.swing.JTextField JBS_jTxtNome;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable;
     // End of variables declaration//GEN-END:variables
 }

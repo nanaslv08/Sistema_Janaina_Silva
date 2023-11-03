@@ -72,21 +72,21 @@ public class ClienteDAO extends DaoAbstract{
         return lista;        
     }
     
-    public List listData(Date data){
+    public List listEstado(int estado){
         session.beginTransaction();
         Criteria criteria = session.createCriteria(JbsCliente.class);
 //        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
-        criteria.add(Restrictions.eq("jbsDataNasc", data));
+        criteria.add(Restrictions.eq("jbsEstado", estado));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;        
     }
-    public List listDataNome(Date data, String nome){
+    public List listEstadoNome(int estado, String nome){
         session.beginTransaction();
         Criteria criteria = session.createCriteria(JbsCliente.class);
 //        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
-        criteria.add(Restrictions.eq("jbsDataNasc", data));
-        criteria.add(Restrictions.like("jbsNome", nome));
+        criteria.add(Restrictions.eq("jbsEstado", estado));
+        criteria.add(Restrictions.like("jbsNome", nome, MatchMode.ANYWHERE));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;        
