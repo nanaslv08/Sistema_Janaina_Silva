@@ -5,42 +5,44 @@
  */
 package query;
 
-import dao.VendedorDAO;
+import dao.VendasProdutoDAO;
+import java.text.ParseException;
 import java.util.List;
-import view.VendedorControle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
+import tools.Util;
+import view.VendasProdutoControle;
 
 /**
  *
  * @author Janaína B da Silva
  */
-public class JDlgConsultaVendedor extends javax.swing.JDialog {
+public class JDlgConsultaVendasProduto extends javax.swing.JDialog {
 
-    private VendedorControle vendedorControle;
-    VendedorDAO vendedorDAO;
+     private VendasProdutoControle vProdutoControle;
+    VendasProdutoDAO vProdutoDAO;
+    MaskFormatter mascaraValorUni;
     /**
-     * Creates new form JDlgConsultaVendedor
+     * Creates new form JDlgConsultaVendas
      */
-    public JDlgConsultaVendedor(java.awt.Frame parent, boolean modal) {
+    public JDlgConsultaVendasProduto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setTitle("Consulta de Vendedor");
+        setTitle("Consulta de Produto");
         setLocationRelativeTo(null);
-        vendedorControle = new VendedorControle();
-        vendedorDAO = new VendedorDAO();
-        List lista = vendedorDAO.listAll();
-        vendedorControle.setList(lista);
-        jTable.setModel(vendedorControle);
-    }
-    
-    private int GenSele(String genSele) {
-    if (genSele.equals("F")) {
-        return 0;
-    } else if (genSele.equals("M")) {
-        return 1;
-    } else if(genSele.equals("N")){
-        return 2;
-    }
-    return 0;
+        vProdutoControle = new VendasProdutoControle();
+        vProdutoDAO = new VendasProdutoDAO();
+        List lista = vProdutoDAO.listAll();
+        vProdutoControle.setList(lista);
+        jTable.setModel(vProdutoControle);
+        try {
+            mascaraValorUni = new MaskFormatter("###.##");
+        } catch (ParseException ex) {
+            Logger.getLogger(JDlgConsultaProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JBS_jFmtVUnitario.setFormatterFactory(new DefaultFormatterFactory(mascaraValorUni));
     }
 
     /**
@@ -54,12 +56,10 @@ public class JDlgConsultaVendedor extends javax.swing.JDialog {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        JBS_jTxtNome = new javax.swing.JTextField();
         JBS_jBtnConsultar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        JBS_jCboGenero = new javax.swing.JComboBox<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        JBS_jTxtQuantidade = new javax.swing.JTextField();
+        JBS_jFmtVUnitario = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
 
@@ -67,7 +67,7 @@ public class JDlgConsultaVendedor extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setText("Nome");
+        jLabel1.setText("Valor Unitário - Maior que");
 
         JBS_jBtnConsultar.setText("Consultar");
         JBS_jBtnConsultar.addActionListener(new java.awt.event.ActionListener() {
@@ -76,21 +76,13 @@ public class JDlgConsultaVendedor extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setText("Genero");
+        jLabel2.setText("Quantidade");
 
-        JBS_jCboGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "M", "N", " " }));
-        JBS_jCboGenero.addActionListener(new java.awt.event.ActionListener() {
+        JBS_jTxtQuantidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBS_jCboGeneroActionPerformed(evt);
+                JBS_jTxtQuantidadeActionPerformed(evt);
             }
         });
-
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "0 - F", "1 - M", "2 - N", " " };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jList1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -99,18 +91,17 @@ public class JDlgConsultaVendedor extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JBS_jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel1)
+                    .addComponent(JBS_jFmtVUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(90, 90, 90)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(JBS_jCboGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(74, 74, 74)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(JBS_jBtnConsultar)
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(JBS_jTxtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JBS_jBtnConsultar)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -121,11 +112,10 @@ public class JDlgConsultaVendedor extends javax.swing.JDialog {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JBS_jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JBS_jBtnConsultar)
-                    .addComponent(JBS_jCboGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(JBS_jTxtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JBS_jFmtVUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 15, Short.MAX_VALUE))
         );
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -145,51 +135,51 @@ public class JDlgConsultaVendedor extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void JBS_jCboGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jCboGeneroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JBS_jCboGeneroActionPerformed
-
     private void JBS_jBtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnConsultarActionPerformed
         // TODO add your handling code here:
 
-        if(JBS_jTxtNome.getText().equals("") && JBS_jCboGenero.getSelectedItem().equals("")){
-            List lista = vendedorDAO.listAll();
-            vendedorControle.setList(lista);
+        if(JBS_jTxtQuantidade.getText().equals("") && JBS_jFmtVUnitario.getText().equals("")){
+            List lista = vProdutoDAO.listAll();
+            vProdutoControle.setList(lista);
         }else{
-            if(!JBS_jTxtNome.getText().equals("") && !JBS_jCboGenero.getSelectedItem().equals("")){
-                List lista = vendedorDAO.listGeneroNome(GenSele(JBS_jCboGenero.getSelectedItem().toString()), JBS_jTxtNome.getText());
-                vendedorControle.setList(lista);
+            if(!JBS_jTxtQuantidade.getText().equals("") && !JBS_jFmtVUnitario.getText().equals("")){
+                List lista = vProdutoDAO.listValorUniQuantidade(Util.strDouble(JBS_jFmtVUnitario.getText()), JBS_jTxtQuantidade.getText());
+                vProdutoControle.setList(lista);
             }else{
-                if(!JBS_jTxtNome.getText().equals("")){
-                    List lista = vendedorDAO.listNome(JBS_jTxtNome.getText());
-                    vendedorControle.setList(lista);
+                if(!JBS_jTxtQuantidade.getText().equals("")){
+                    List lista = vProdutoDAO.listQuantidade(JBS_jTxtQuantidade.getText());
+                    vProdutoControle.setList(lista);
                 }else{
-                    if(!JBS_jCboGenero.getSelectedItem().equals("")){
-                        List lista = vendedorDAO.listGenero(GenSele(JBS_jCboGenero.getSelectedItem().toString()));
-                        vendedorControle.setList(lista);
+                    if(!JBS_jFmtVUnitario.getText().equals("")){
+                        List lista = vProdutoDAO.listVUnitario(Util.strDouble(JBS_jFmtVUnitario.getText()));
+                        vProdutoControle.setList(lista);
                     }
                 }
             }
         }
     }//GEN-LAST:event_JBS_jBtnConsultarActionPerformed
+
+    private void JBS_jTxtQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jTxtQuantidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JBS_jTxtQuantidadeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,20 +198,21 @@ public class JDlgConsultaVendedor extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaVendedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaVendasProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaVendedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaVendasProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaVendedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaVendasProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaVendedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaVendasProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDlgConsultaVendedor dialog = new JDlgConsultaVendedor(new javax.swing.JFrame(), true);
+                JDlgConsultaVendasProduto dialog = new JDlgConsultaVendasProduto(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -235,14 +226,12 @@ public class JDlgConsultaVendedor extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBS_jBtnConsultar;
-    private javax.swing.JComboBox<String> JBS_jCboGenero;
-    private javax.swing.JTextField JBS_jTxtNome;
+    private javax.swing.JFormattedTextField JBS_jFmtVUnitario;
+    private javax.swing.JTextField JBS_jTxtQuantidade;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable;
     // End of variables declaration//GEN-END:variables
 }

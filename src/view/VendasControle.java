@@ -5,7 +5,7 @@
  */
 package view;
 
-import bean.JbsVendedor;
+import bean.JbsVenda;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -13,16 +13,16 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Janaína B da Silva
  */
-public class VendedorControle extends AbstractTableModel{
+public class VendasControle extends AbstractTableModel{
+
     List lista;
     
     public void setList(List lista){
         this.lista = lista;
-        this.fireTableDataChanged();
     }
     
-    public JbsVendedor getBean(int row){
-        return (JbsVendedor) lista.get(row);
+    public JbsVenda getBean(int row){
+        return (JbsVenda) lista.get(row);
     }
     
     @Override
@@ -32,26 +32,23 @@ public class VendedorControle extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 4;    
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        JbsVendedor jbsVendedor = (JbsVendedor) lista.get(rowIndex);
+    JbsVenda venda = (JbsVenda) lista.get(rowIndex);
         if(columnIndex == 0){
-            return jbsVendedor.getJbsIdVendedor();
+            return venda.getJbsIdVenda();
         }
         if(columnIndex == 1){
-            return jbsVendedor.getJbsNome();
+            return venda.getJbsTotal();
         }
         if(columnIndex == 2){
-            return jbsVendedor.getJbsCpf();
+            return venda.getJbsVendedor();
         }
         if(columnIndex == 3){
-            return jbsVendedor.getJbsCelular();
-        }
-        if(columnIndex == 4){
-            return jbsVendedor.getJbsGenero();
+            return venda.getJbsCliente();
         }
         return "";
     }
@@ -62,17 +59,15 @@ public class VendedorControle extends AbstractTableModel{
             return "Id";
         }
         if(column == 1){
-            return "Nome";
+            return "Total";
         }
         if(column == 2){
-            return "Cpf";
+            return "Vendedor";
         }
         if(column == 3){
-            return "Celular";
-        }
-        if(column == 4){
-            return "Genero";
+            return "Cliente";
         }
         return "";
     }
+    
 }

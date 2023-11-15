@@ -8,6 +8,7 @@ package dao;
 import bean.JbsVendaProduto;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -58,6 +59,36 @@ public class VendasProdutoDAO extends DaoAbstract{
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;    
+    }
+    
+    public List listQuantidade(String quantidade){
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JbsVendaProduto.class);
+//        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
+        criteria.add(Restrictions.like("jbsQuantidade", quantidade, MatchMode.ANYWHERE));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;        
+    }
+    
+    public List listVUnitario(double valorUnitario){
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JbsVendaProduto.class);
+//        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
+        criteria.add(Restrictions.gt("jbsValorUnitario", valorUnitario));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;        
+    }
+    public List listValorUniQuantidade(double valorUnitario, String quantidade){
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JbsVendaProduto.class);
+//        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
+        criteria.add(Restrictions.gt("jbsValorUnitario", valorUnitario));
+        criteria.add(Restrictions.like("jbsQuantidade", quantidade, MatchMode.ANYWHERE));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;        
     }
     
 }

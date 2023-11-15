@@ -5,6 +5,7 @@
  */
 package query;
 
+import bean.JbsCliente;
 import dao.ClienteDAO;
 import java.util.List;
 import tools.Util;
@@ -18,6 +19,7 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
 
     private ClienteControle clienteControle;
     ClienteDAO clienteDAO;
+    JbsCliente cliente;
 
     /**
      * Creates new form JDlgConsultaCliente
@@ -32,6 +34,27 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
         List lista = clienteDAO.listAll();
         clienteControle.setList(lista);
         jTable.setModel(clienteControle);
+    }
+    
+    private int EstSele(String estSele) {
+    if (estSele.equals("MS")) {
+        return 0;
+    } else if (estSele.equals("AC")) {
+        return 1;
+    } else if(estSele.equals("MT")){
+        return 2;
+    } else if(estSele.equals("RJ")){
+        return 3;
+    } else if(estSele.equals("SP")){
+        return 4;
+    } else if(estSele.equals("AM")){
+        return 5;
+    } else if(estSele.equals("RS")){
+        return 6;
+    } else if(estSele.equals("CS")){
+        return 7;
+    }    
+    return 0;
     }
 
     /**
@@ -50,7 +73,7 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        JBS_jTxtEstado = new javax.swing.JTextField();
+        JBS_jCboEstado = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
 
@@ -76,6 +99,8 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(jList1);
 
+        JBS_jCboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MS", "AC", "MT", "RJ", "SP", "AM", "RS", "SC" }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -88,10 +113,10 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(JBS_jTxtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JBS_jCboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
+                .addGap(63, 63, 63)
                 .addComponent(JBS_jBtnConsultar)
                 .addContainerGap())
         );
@@ -105,7 +130,7 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBS_jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JBS_jBtnConsultar)
-                    .addComponent(JBS_jTxtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JBS_jCboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane2)
@@ -149,17 +174,17 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
 
     private void JBS_jBtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnConsultarActionPerformed
         // TODO add your handling code here:
-        if(JBS_jTxtNome.getText().equals("") && JBS_jTxtEstado.getText().equals("")){
+        if(JBS_jTxtNome.getText().equals("") && JBS_jCboEstado.getSelectedItem().equals("")){
             List listaVazia = clienteDAO.listAll();
             clienteControle.setList(listaVazia);
-        }else if(!JBS_jTxtNome.getText().equals("") && !JBS_jTxtEstado.getText().equals("")){
-                List listaCheia = clienteDAO.listEstadoNome(Util.strInt(JBS_jTxtEstado.getText()), JBS_jTxtNome.getText());
+        }else if(!JBS_jTxtNome.getText().equals("") && !JBS_jCboEstado.getSelectedItem().equals("")){
+                List listaCheia = clienteDAO.listEstadoNome(EstSele(JBS_jCboEstado.getSelectedItem().toString()), JBS_jTxtNome.getText());
                 clienteControle.setList(listaCheia);
             }else if(!JBS_jTxtNome.getText().equals("")){
                     List listaNome = clienteDAO.listNome(JBS_jTxtNome.getText());
                     clienteControle.setList(listaNome);
-                }else if(!JBS_jTxtEstado.getText().equals("")){
-                        List lista = clienteDAO.listEstado(Util.strInt(JBS_jTxtEstado.getText()));
+                }else if(!JBS_jCboEstado.getSelectedItem().equals("")){
+                        List lista = clienteDAO.listEstado(EstSele(JBS_jCboEstado.getSelectedItem().toString()));
                         clienteControle.setList(lista);
                     }
         
@@ -209,7 +234,7 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBS_jBtnConsultar;
-    private javax.swing.JTextField JBS_jTxtEstado;
+    private javax.swing.JComboBox<String> JBS_jCboEstado;
     private javax.swing.JTextField JBS_jTxtNome;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

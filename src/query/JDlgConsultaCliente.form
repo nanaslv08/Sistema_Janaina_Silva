@@ -64,11 +64,11 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <Component id="JBS_jTxtEstado" min="-2" pref="179" max="-2" attributes="0"/>
+                      <Component id="JBS_jCboEstado" min="-2" pref="170" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jScrollPane2" min="-2" pref="70" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                   <Component id="JBS_jBtnConsultar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -85,7 +85,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="JBS_jTxtNome" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="JBS_jBtnConsultar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="JBS_jTxtEstado" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="JBS_jCboEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="98" max="32767" attributes="0"/>
               </Group>
@@ -145,7 +145,24 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JTextField" name="JBS_jTxtEstado">
+        <Component class="javax.swing.JComboBox" name="JBS_jCboEstado">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="8">
+                <StringItem index="0" value="MS"/>
+                <StringItem index="1" value="AC"/>
+                <StringItem index="2" value="MT"/>
+                <StringItem index="3" value="RJ"/>
+                <StringItem index="4" value="SP"/>
+                <StringItem index="5" value="AM"/>
+                <StringItem index="6" value="RS"/>
+                <StringItem index="7" value="SC"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

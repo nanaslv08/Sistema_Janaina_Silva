@@ -23,7 +23,7 @@ public class JDlgConsultaProduto extends javax.swing.JDialog {
 
     private ProdutoControle produtoControle;
     ProdutoDAO produtoDAO;
-    MaskFormatter mascaraValor;
+//    MaskFormatter mascaraValor;
     /**
      * Creates new form JDlgConsultaProduto
      */
@@ -37,12 +37,12 @@ public class JDlgConsultaProduto extends javax.swing.JDialog {
         List lista = produtoDAO.listAll();
         produtoControle.setList(lista);
         jTable.setModel(produtoControle);
-        try {
-            mascaraValor = new MaskFormatter("###.##");
-        } catch (ParseException ex) {
-            Logger.getLogger(JDlgConsultaProduto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        JBS_jFmtValor.setFormatterFactory(new DefaultFormatterFactory(mascaraValor));
+//        try {
+//            mascaraValor = new MaskFormatter("###.##");
+//        } catch (ParseException ex) {
+//            Logger.getLogger(JDlgConsultaProduto.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        JBS_jFmtValor.setFormatterFactory(new DefaultFormatterFactory(mascaraValor));;
     }
 
     /**
@@ -68,6 +68,12 @@ public class JDlgConsultaProduto extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setText("Nome");
+
+        JBS_jTxtNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBS_jTxtNomeActionPerformed(evt);
+            }
+        });
 
         JBS_jBtnConsultar.setText("Consultar");
         JBS_jBtnConsultar.addActionListener(new java.awt.event.ActionListener() {
@@ -185,6 +191,10 @@ public class JDlgConsultaProduto extends javax.swing.JDialog {
     private void JBS_jFmtValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jFmtValorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JBS_jFmtValorActionPerformed
+
+    private void JBS_jTxtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jTxtNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JBS_jTxtNomeActionPerformed
 
     /**
      * @param args the command line arguments

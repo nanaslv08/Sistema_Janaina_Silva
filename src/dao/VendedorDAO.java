@@ -64,27 +64,27 @@ public class VendedorDAO extends DaoAbstract{
         Criteria criteria = session.createCriteria(JbsVendedor.class);
 //        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
         criteria.add(Restrictions.like("jbsNome", nome, MatchMode.ANYWHERE));
-        List lista = criteria.list();;
+        List lista = criteria.list();
         session.getTransaction().commit();
         return lista;        
     }
     
-    public List listcpf(String cpf){
+    public List listGenero(int genero){
         session.beginTransaction();
         Criteria criteria = session.createCriteria(JbsVendedor.class);
 //        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
-        criteria.add(Restrictions.like("jbsCpf", cpf, MatchMode.ANYWHERE));
-        List lista = criteria.list();;
+        criteria.add(Restrictions.eq("jbsGenero", genero));
+        List lista = criteria.list();
         session.getTransaction().commit();
         return lista;        
     }
-    public List listCpfNome(String cpf, String nome){
+    public List listGeneroNome(int genero, String nome){
         session.beginTransaction();
         Criteria criteria = session.createCriteria(JbsVendedor.class);
 //        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
-        criteria.add(Restrictions.like("jbsCpf", cpf, MatchMode.ANYWHERE));
+        criteria.add(Restrictions.eq("jbsGenero", genero));
         criteria.add(Restrictions.like("jbsNome", nome, MatchMode.ANYWHERE));
-        List lista = criteria.list();;
+        List lista = criteria.list();
         session.getTransaction().commit();
         return lista;        
     }
