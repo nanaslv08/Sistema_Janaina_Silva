@@ -5,6 +5,7 @@
  */
 package dao;
 
+import bean.JbsVenda;
 import bean.JbsVendaProduto;
 import java.util.List;
 import org.hibernate.Criteria;
@@ -90,5 +91,15 @@ public class VendasProdutoDAO extends DaoAbstract{
         session.getTransaction().commit();
         return lista;        
     }
+    
+    public List listaProdutos(JbsVenda jbsVenda){
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JbsVendaProduto.class);
+        criteria.add(Restrictions.eq("jbsVenda", jbsVenda));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
     
 }

@@ -19,10 +19,26 @@ public class VendasProdutoControle extends AbstractTableModel{
     
     public void setList(List lista){
         this.lista = lista;
+        this.fireTableDataChanged();
     }
     
     public JbsVendaProduto getBean(int row){
         return (JbsVendaProduto) lista.get(row);
+    }
+    
+    public void addBean(JbsVendaProduto jbsVendaProduto){
+        lista.add(jbsVendaProduto);
+        this.fireTableDataChanged();
+    }
+    
+    public void removeBean(int Index){
+        lista.remove(Index);
+        this.fireTableDataChanged();
+    }
+    
+    public void updateBean(int Index, JbsVendaProduto jbsVendaProduto){
+        lista.set(Index, jbsVendaProduto);
+        this.fireTableDataChanged();
     }
     
     @Override
@@ -32,7 +48,7 @@ public class VendasProdutoControle extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 4;    
+        return 5;    
     }
 
     @Override
@@ -50,6 +66,9 @@ public class VendasProdutoControle extends AbstractTableModel{
         if(columnIndex == 3){
             return vProduto.getJbsProduto();
         }
+        if(columnIndex == 4){
+            return vProduto.getJbsTotal();
+        }
         return "";
     }
     
@@ -66,6 +85,9 @@ public class VendasProdutoControle extends AbstractTableModel{
         }
         if(column == 3){
             return "Produto";
+        }
+        if(column == 4){
+            return "Total";
         }
         return "";
     }

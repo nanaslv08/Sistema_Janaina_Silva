@@ -26,16 +26,18 @@ public class JbsVendaProduto  implements java.io.Serializable {
      private JbsVenda jbsVenda;
      private String jbsQuantida;
      private double jbsVUnitario;
+     private double jbsTotal;
 
     public JbsVendaProduto() {
     }
 
-    public JbsVendaProduto(int jbsIdVendaProduto, JbsProduto jbsProduto, JbsVenda jbsVenda, String jbsQuantida, double jbsVUnitario) {
+    public JbsVendaProduto(int jbsIdVendaProduto, JbsProduto jbsProduto, JbsVenda jbsVenda, String jbsQuantida, double jbsVUnitario, double jbsTotal) {
        this.jbsIdVendaProduto = jbsIdVendaProduto;
        this.jbsProduto = jbsProduto;
        this.jbsVenda = jbsVenda;
        this.jbsQuantida = jbsQuantida;
        this.jbsVUnitario = jbsVUnitario;
+       this.jbsTotal = jbsTotal;
     }
    
      @Id 
@@ -90,6 +92,14 @@ public class JbsVendaProduto  implements java.io.Serializable {
         this.jbsVUnitario = jbsVUnitario;
     }
 
+    @Column(name="jbs_total", nullable=false, precision=13)
+    public double getJbsTotal() {
+        return this.jbsTotal;
+    }
+    
+    public void setJbsTotal(double jbsTotal) {
+        this.jbsTotal = jbsTotal;
+    }
 
 
 
