@@ -1,5 +1,5 @@
 package bean;
-// Generated 30/10/2023 10:00:06 by Hibernate Tools 4.3.1
+// Generated 08/12/2023 16:18:45 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -39,7 +39,6 @@ public class JbsCliente  implements java.io.Serializable {
      private String jbsCidade;
      private int jbsEstado;
      private String jbsCep;
-//     private Set pedidoses = new HashSet(0);
 //     private Set jbsVendas = new HashSet(0);
 
     public JbsCliente() {
@@ -63,7 +62,7 @@ public class JbsCliente  implements java.io.Serializable {
         this.jbsEstado = jbsEstado;
         this.jbsCep = jbsCep;
     }
-//    public JbsCliente(int jbsIdCliente, String jbsNome, String jbsCpf, String jbsRg, Date jbsDataNasc, String jbsCelular, String jbsGenero, String jbsEmail, String jbsNaturalidade, String jbsRua, String jbsBairro, String jbsNumcasa, String jbsCidade, String jbsEstado, String jbsCep, Set pedidoses, Set jbsVendas) {
+//    public JbsCliente(int jbsIdCliente, String jbsNome, String jbsCpf, String jbsRg, Date jbsDataNasc, String jbsCelular, int jbsGenero, String jbsEmail, String jbsNaturalidade, String jbsRua, String jbsBairro, String jbsNumcasa, String jbsCidade, int jbsEstado, String jbsCep, Set jbsVendas) {
 //       this.jbsIdCliente = jbsIdCliente;
 //       this.jbsNome = jbsNome;
 //       this.jbsCpf = jbsCpf;
@@ -79,10 +78,9 @@ public class JbsCliente  implements java.io.Serializable {
 //       this.jbsCidade = jbsCidade;
 //       this.jbsEstado = jbsEstado;
 //       this.jbsCep = jbsCep;
-//       this.pedidoses = pedidoses;
 //       this.jbsVendas = jbsVendas;
 //    }
-   
+//   
      @Id 
 
     
@@ -236,22 +234,35 @@ public class JbsCliente  implements java.io.Serializable {
     }
 
 //@OneToMany(fetch=FetchType.LAZY, mappedBy="jbsCliente")
-//    public Set getPedidoses() {
-//        return this.pedidoses;
-//    }
-    
-//    public void setPedidoses(Set pedidoses) {
-//        this.pedidoses = pedidoses;
-//    }
-
-//@OneToMany(fetch=FetchType.LAZY, mappedBy="jbsCliente")
 //    public Set getJbsVendas() {
 //        return this.jbsVendas;
 //    }
-    
+//    
 //    public void setJbsVendas(Set jbsVendas) {
 //        this.jbsVendas = jbsVendas;
 //    }
+    
+    @Override
+     public String toString() {
+    return jbsNome;
+}
+
+
+      public boolean raiva (Object object){
+      if(object instanceof JbsCliente){
+      // Verifica se o objeto passado como argumento é uma instância de MmsCliente
+      JbsCliente jbsCliente = (JbsCliente) object;
+      // Converte o objeto genérico para o tipo MmsCliente
+        if(this.getJbsIdCliente()== jbsCliente.getJbsIdCliente())
+              // Compara os IDs dos objetos atual e recebido como parâmetro
+            return true;
+             // Se os IDs forem iguais, retorna verdadeiro (indicando que os objetos são iguais)
+                }         
+                return false;
+                    // Se não for uma instância de MmsCliente ou os IDs forem diferentes, retorna falso
+
+                    //essa função é usada no cbo para igualar as fks de cliente no banco de dados
+      }
 
 
 

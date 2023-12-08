@@ -37,6 +37,7 @@ public class JDlgVendas extends javax.swing.JDialog {
     public JbsCliente jbsCliente;
     public JbsVendedor jbsVendedor;
     public VendasProdutoDAO vendasProdutoDAO;
+    public JbsVendaProduto jbsVendasProduto;
     public VendasProdutoControle vendasProdutoControle;
     public JDlgVendasProduto jDlgVendasProduto;
     /**
@@ -47,19 +48,19 @@ public class JDlgVendas extends javax.swing.JDialog {
         initComponents();
         setTitle("Cadastro de Vendas");
         setLocationRelativeTo(null);
-        vendasDAO = new VendasDAO();
-        jbsCliente = new JbsCliente();
-        jbsVendedor = new JbsVendedor();
-        jDlgVendasProduto = new JDlgVendasProduto(null, true);
-        vendasProdutoDAO = new VendasProdutoDAO();
-        vendasProdutoControle = new VendasProdutoControle();
+//        vendasDAO = new VendasDAO();
+//        jbsCliente = new JbsCliente();
+//        jbsVendedor = new JbsVendedor();
+//        jDlgVendasProduto = new JDlgVendasProduto(null, true);
+//        vendasProdutoDAO = new VendasProdutoDAO();
+//        vendasProdutoControle = new VendasProdutoControle();
         Util.habilitar(false,JBS_jTxtNumOs, JBS_jFmtDataVenda, JBS_jFmtTotal, 
                 JBS_jCboCliente, JBS_jCboVendedor,JBS_jBtnCancelar, JBS_jBtnConfirmar, 
                 JBS_jBtnAlterarProd, JBS_jBtnExcluirProd, JBS_jBtnIncluirProd);
         Util.habilitar(true, JBS_jBtnIncluir, JBS_jBtnAlterar, JBS_jBtnExcluir, JBS_jBtnPesquisar);
         
         try {
-            mascaraTotal = new MaskFormatter("####,##");
+            mascaraTotal = new MaskFormatter("####.##");
             mascaraData = new MaskFormatter("##/##/####");
         } catch (ParseException ex) {
             Logger.getLogger(JDlgUsuario.class.getName()).log(Level.SEVERE, null, ex);
@@ -83,6 +84,7 @@ public class JDlgVendas extends javax.swing.JDialog {
     }
     
     public JbsVenda ViewBean(){
+        jbsVenda = new JbsVenda();
         int id = Integer.valueOf(JBS_jTxtNumOs.getText());
         jbsVenda.setJbsIdVenda(id);
         double total = Double.parseDouble(JBS_jFmtTotal.getText());
@@ -91,30 +93,35 @@ public class JDlgVendas extends javax.swing.JDialog {
         try {
             jbsVenda.setJbsData(formato.parse(JBS_jFmtDataVenda.getText()));
         } catch (ParseException ex) {
-            //Logger.getLogger(JDlgVendass.class.getName()).log(Level.SEVERE, null, ex);
             System.out.print("por favor funciona: " + ex.getMessage());
         }
-//        int oi = Integer.valueOf(jCboCliente.getSelectedIndex());
-//        pedidos.setClientes(oi);
-//        pedidos.setVendedor(jCboVendedor.getSelectedIndex());
         jbsVenda.setJbsCliente(JBS_jCboCliente.getItemAt(JBS_jCboCliente.getSelectedIndex()));
         jbsVenda.setJbsVendedor(JBS_jCboVendedor.getItemAt(JBS_jCboVendedor.getSelectedIndex())); 
-//getItemAt passa o valor na posição do index
+        //getItemAt passa o valor na posição do index
         return jbsVenda;
     }
     
     
     public void beanView(JbsVenda jbsVenda){
-        String valor = String.valueOf(jbsVenda.getJbsIdVenda());
-        JBS_jTxtNumOs.setText(valor);
+        //String valor = String.valueOf(jbsVenda.getJbsIdVenda());
+        JBS_jTxtNumOs.setText(String.valueOf(jbsVenda.getJbsIdVenda()));
         JBS_jFmtTotal.setText(String.valueOf(jbsVenda.getJbsTotal()));
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        JBS_jFmtDataVenda.setText(formato.format(jbsVenda.getJbsData()));
+        JBS_jFmtDataVenda.setText(Util.dateStr(jbsVenda.getJbsData()));
         JBS_jCboCliente.setSelectedItem(jbsVenda.getJbsCliente());
         JBS_jCboVendedor.setSelectedItem(jbsVenda.getJbsVendedor());
         
+        vendasProdutoDAO = new VendasProdutoDAO();
         List listaProd = (List) vendasProdutoDAO.listaProdutos(jbsVenda);
         vendasProdutoControle.setList(listaProd);
+        
+         
+    }
+    
+    public void habilitar(boolean valor) {
+        Util.habilitar(valor, JBS_jTxtNumOs, JBS_jFmtTotal, JBS_jFmtDataVenda, JBS_jCboVendedor,
+                JBS_jCboCliente, JBS_jBtnConfirmar,JBS_jBtnCancelar);
+        Util.habilitar(valor, JBS_jBtnIncluirProd, JBS_jBtnAlterarProd, JBS_jBtnExcluirProd);
+        Util.habilitar(!valor, JBS_jBtnIncluir, JBS_jBtnAlterar, JBS_jBtnExcluir, JBS_jBtnPesquisar);
     }
     
     public int getSelectedRowProd() {
@@ -142,7 +149,7 @@ public class JDlgVendas extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         JBS_jTxtNumOs = new javax.swing.JTextField();
-        JBS_jCboCliente = new javax.swing.JComboBox<JbsCliente>();
+        JBS_jCboCliente = new javax.swing.JComboBox<>();
         JBS_jCboVendedor = new javax.swing.JComboBox<JbsVendedor>();
         jLabel1 = new javax.swing.JLabel();
         JBS_jBtnConfirmar = new javax.swing.JButton();
@@ -402,82 +409,137 @@ public class JDlgVendas extends javax.swing.JDialog {
     }//GEN-LAST:event_JBS_jCboVendedorActionPerformed
 
     private void JBS_jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnConfirmarActionPerformed
-        if(incluindo == true){
-            vendasDAO.insert(ViewBean());//bean com bean retorna bean
+//        if(incluindo == true){
+//            vendasDAO.insert(ViewBean());//bean com bean retorna bean
+//        } else {
+//            vendasDAO.update(ViewBean());
+//        }
+//        Util.habilitar(false,JBS_jTxtNumOs, JBS_jFmtDataVenda, JBS_jCboCliente, 
+//                JBS_jCboVendedor, JBS_jFmtTotal, JBS_jBtnCancelar, JBS_jBtnConfirmar, 
+//                JBS_jBtnAlterarProd, JBS_jBtnExcluirProd, JBS_jBtnIncluirProd);
+//        Util.habilitar(true, JBS_jBtnIncluir, JBS_jBtnAlterar, JBS_jBtnExcluir, JBS_jBtnPesquisar);
+        
+       
+            
+        if (incluindo == true) {
+            vendasDAO.insert(ViewBean());
+            vendasProdutoDAO = new VendasProdutoDAO();
+            
+            for (int linha = 0; linha < jTable1.getRowCount(); linha++) {
+                jbsVendasProduto = vendasProdutoControle.getBean(linha);
+                jbsVendasProduto.setJbsVenda(jbsVenda);
+                vendasProdutoDAO.insert(jbsVendasProduto);
+            }
         } else {
             vendasDAO.update(ViewBean());
+            //remover todos os pedidos produtos deste pedido
+            vendasProdutoDAO = new VendasProdutoDAO();
+
+            //incluir todos os pedidosProduto que estao no jtable
+            for (int linha = 0; linha < jTable1.getRowCount(); linha++) {
+                jbsVendasProduto = vendasProdutoControle.getBean(linha);
+                jbsVendasProduto.setJbsVenda(jbsVenda);
+                vendasProdutoDAO.insert(jbsVendasProduto);
+            }
         }
-        Util.habilitar(false,JBS_jTxtNumOs, JBS_jFmtDataVenda, JBS_jCboCliente, 
-                JBS_jCboVendedor, JBS_jFmtTotal, JBS_jBtnCancelar, JBS_jBtnConfirmar, 
-                JBS_jBtnAlterarProd, JBS_jBtnExcluirProd, JBS_jBtnIncluirProd);
-        Util.habilitar(true, JBS_jBtnIncluir, JBS_jBtnAlterar, JBS_jBtnExcluir, JBS_jBtnPesquisar);
+        habilitar(false);
         Util.limparCampos(JBS_jTxtNumOs, JBS_jFmtDataVenda, JBS_jCboCliente, JBS_jCboVendedor, JBS_jFmtTotal); 
+        vendasProdutoControle.setList(new ArrayList());
+
+        jbsVenda = null;
     }//GEN-LAST:event_JBS_jBtnConfirmarActionPerformed
 
     private void JBS_jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnPesquisarActionPerformed
-        // TODO add your handling code here:
-        //habilitar();
-        //        String pesquisar = JOptionPane.showInputDialog(null, "Entre com o código (FK)");
-        //        Usuario_DAO usuario_DAO = new Usuario_DAO();
-        //        int id = Integer.valueOf(pesquisar);
-        //        Usuario usuario = (Usuario) usuario_DAO.list(id); //list retorna o bean e ttansforma o bean em objeto
-        //        beanView(usuario);
-        //        ALterarExcluir();
-        //
+//
+//        JDlgVendasPesquisa jDlgVendasPesquisa = new JDlgVendasPesquisa(null, true);
+//        jDlgVendasPesquisa.setTelaAnterior(this);
+//        jDlgVendasPesquisa.setVisible(true);
+//        Util.habilitar(true, JBS_jBtnAlterar, JBS_jBtnPesquisar, JBS_jBtnCancelar, 
+//                JBS_jBtnExcluir);
+//        Util.habilitar(false, JBS_jBtnConfirmar, JBS_jBtnAlterarProd, JBS_jBtnExcluirProd, 
+//                JBS_jBtnIncluirProd);   
         JDlgVendasPesquisa jDlgVendasPesquisa = new JDlgVendasPesquisa(null, true);
         jDlgVendasPesquisa.setTelaAnterior(this);
         jDlgVendasPesquisa.setVisible(true);
-        Util.habilitar(true, JBS_jBtnAlterar, JBS_jBtnPesquisar, JBS_jBtnCancelar, 
-                JBS_jBtnExcluir);
-        Util.habilitar(false, JBS_jBtnConfirmar, JBS_jBtnAlterarProd, JBS_jBtnExcluirProd, 
-                JBS_jBtnIncluirProd);        
     }//GEN-LAST:event_JBS_jBtnPesquisarActionPerformed
 
     private void JBS_jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnCancelarActionPerformed
 
-        Util.habilitar(false,JBS_jCboCliente, JBS_jCboVendedor, JBS_jFmtDataVenda, JBS_jFmtTotal,
-                JBS_jTxtNumOs, JBS_jBtnCancelar, JBS_jBtnConfirmar);
-        Util.habilitar(true, JBS_jBtnIncluir, JBS_jBtnAlterar, JBS_jBtnExcluir, JBS_jBtnPesquisar);
-        Util.mensagem("Operação Cancelada");
+//        Util.habilitar(false,JBS_jCboCliente, JBS_jCboVendedor, JBS_jFmtDataVenda, JBS_jFmtTotal,
+//                JBS_jTxtNumOs, JBS_jBtnCancelar, JBS_jBtnConfirmar);
+//        Util.habilitar(true, JBS_jBtnIncluir, JBS_jBtnAlterar, JBS_jBtnExcluir, JBS_jBtnPesquisar);
+//        Util.mensagem("Operação Cancelada");
+//        Util.limparCampos(JBS_jCboCliente, JBS_jCboVendedor, JBS_jFmtDataVenda, JBS_jFmtTotal,
+//                JBS_jTxtNumOs);
+        vendasProdutoControle = new VendasProdutoControle();
+
+        habilitar(false);
         Util.limparCampos(JBS_jCboCliente, JBS_jCboVendedor, JBS_jFmtDataVenda, JBS_jFmtTotal,
-                JBS_jTxtNumOs);
+                JBS_jTxtNumOs);        
+        vendasProdutoControle.setList(new ArrayList());
+        jbsVenda = null;
     }//GEN-LAST:event_JBS_jBtnCancelarActionPerformed
 
     private void JBS_jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnIncluirActionPerformed
-        Util.habilitar(true,JBS_jTxtNumOs, JBS_jFmtDataVenda, JBS_jCboCliente, 
-                JBS_jCboVendedor, JBS_jFmtTotal, JBS_jBtnCancelar, JBS_jBtnConfirmar);
-        Util.habilitar(false, JBS_jBtnIncluir, JBS_jBtnAlterar, JBS_jBtnExcluir, 
-                JBS_jBtnPesquisar, JBS_jBtnIncluirProd, JBS_jBtnExcluirProd, JBS_jBtnAlterarProd);
+//        Util.habilitar(true,JBS_jTxtNumOs, JBS_jFmtDataVenda, JBS_jCboCliente, 
+//                JBS_jCboVendedor, JBS_jFmtTotal, JBS_jBtnCancelar, JBS_jBtnConfirmar);
+//        Util.habilitar(false, JBS_jBtnIncluir, JBS_jBtnAlterar, JBS_jBtnExcluir, 
+//                JBS_jBtnPesquisar, JBS_jBtnIncluirProd, JBS_jBtnExcluirProd, JBS_jBtnAlterarProd);
+//                incluindo = true;
+        VendasProdutoControle vendasProdutoControle = new VendasProdutoControle();
         Util.limparCampos(JBS_jTxtNumOs, JBS_jFmtDataVenda, JBS_jCboCliente, JBS_jCboVendedor, 
                 JBS_jFmtTotal);
+        habilitar(true);
+        vendasProdutoControle.setList(new ArrayList()); 
+        JBS_jTxtNumOs.grabFocus();
         incluindo = true;
-        
-//        vendasProdutoControle.setList(new ArrayList());
-//        jTxtNumVendas.grabFocus();
-//        incluindo = true;
-//        pedidos = new Pedidos();
-        //Double.parseDouble(String string);
+        jbsVenda = new JbsVenda();
     }//GEN-LAST:event_JBS_jBtnIncluirActionPerformed
 
     private void JBS_jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnAlterarActionPerformed
 
-        Util.habilitar(true,JBS_jTxtNumOs, JBS_jFmtDataVenda, JBS_jCboCliente, 
-                JBS_jCboVendedor, JBS_jFmtTotal, JBS_jBtnCancelar, JBS_jBtnConfirmar);
-        Util.habilitar(false, JBS_jBtnIncluir, JBS_jBtnAlterar, JBS_jBtnExcluir, JBS_jBtnPesquisar);
-        incluindo = false;
+//        Util.habilitar(true,JBS_jTxtNumOs, JBS_jFmtDataVenda, JBS_jCboCliente, 
+//                JBS_jCboVendedor, JBS_jFmtTotal, JBS_jBtnCancelar, JBS_jBtnConfirmar);
+//        Util.habilitar(false, JBS_jBtnIncluir, JBS_jBtnAlterar, JBS_jBtnExcluir, JBS_jBtnPesquisar);
+//        incluindo = false;
+//        
+        jbsVenda = new JbsVenda();
+        if ( jbsVenda!= null) {
+            habilitar(true);
+            incluindo = false;
+        } else {
+            Util.mensagem("Deve ser realizada uma pesquisa antes");
+        }
     }//GEN-LAST:event_JBS_jBtnAlterarActionPerformed
 
     private void JBS_jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnExcluirActionPerformed
-        Util.habilitar(false, JBS_jBtnAlterarProd, JBS_jBtnExcluirProd, JBS_jBtnIncluirProd);
-        //tá aqui
-        if (Util.perguntar("Deseja excluir o registro?") == true){
-            jbsVenda = ViewBean();
-            vendasDAO.delete(jbsVenda);
-        }else{
-            Util.mensagem("Exclusão cancelada");
+//        Util.habilitar(false, JBS_jBtnAlterarProd, JBS_jBtnExcluirProd, JBS_jBtnIncluirProd);
+//        //tá aqui
+//        if (Util.perguntar("Deseja excluir o registro?") == true){
+//            jbsVenda = ViewBean();
+//            vendasDAO.delete(jbsVenda);
+//        }else{
+//            Util.mensagem("Exclusão cancelada");
+//        }
+//        Util.limparCampos(JBS_jTxtNumOs, JBS_jFmtDataVenda, JBS_jCboCliente, JBS_jCboVendedor, JBS_jFmtTotal);
+        vendasProdutoControle = new VendasProdutoControle();
+        vendasProdutoDAO = new VendasProdutoDAO();
+        jbsVenda = new JbsVenda();
+        jbsVendasProduto = new JbsVendaProduto();
+        vendasDAO = new VendasDAO();
+        if (jbsVenda != null) {
+            if (Util.perguntar("Deseja excluir o pedido?") == true) {
+                for (int linha = 0; linha < jTable1.getRowCount(); linha++) {
+                    jbsVendasProduto = vendasProdutoControle.getBean(linha);
+                    vendasProdutoDAO.delete(jbsVendasProduto);
+                }
+                vendasDAO.delete(jbsVenda);
+            }
+        } else {
+            Util.mensagem("Deve ser realizada uma pesquisa antes");
         }
         Util.limparCampos(JBS_jTxtNumOs, JBS_jFmtDataVenda, JBS_jCboCliente, JBS_jCboVendedor, JBS_jFmtTotal);
-
+        jbsVenda = null;
     }//GEN-LAST:event_JBS_jBtnExcluirActionPerformed
 
     /**

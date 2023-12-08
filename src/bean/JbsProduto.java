@@ -1,5 +1,5 @@
 package bean;
-// Generated 30/10/2023 10:00:06 by Hibernate Tools 4.3.1
+// Generated 08/12/2023 16:18:45 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -27,7 +27,6 @@ public class JbsProduto  implements java.io.Serializable {
      private double jbsValor;
      private int jbsCategoria;
      private String jbsEspecifica;
-//     private Set pedidosProdutoses = new HashSet(0);
 //     private Set jbsVendaProdutos = new HashSet(0);
 
     public JbsProduto() {
@@ -41,13 +40,12 @@ public class JbsProduto  implements java.io.Serializable {
         this.jbsCategoria = jbsCategoria;
         this.jbsEspecifica = jbsEspecifica;
     }
-//    public JbsProduto(int jbsIdProduto, String jbsNome, BigDecimal jbsValor, String jbsCategoria, String jbsEspecifica, Set pedidosProdutoses, Set jbsVendaProdutos) {
+//    public JbsProduto(int jbsIdProduto, String jbsNome, BigDecimal jbsValor, int jbsCategoria, String jbsEspecifica, Set jbsVendaProdutos) {
 //       this.jbsIdProduto = jbsIdProduto;
 //       this.jbsNome = jbsNome;
 //       this.jbsValor = jbsValor;
 //       this.jbsCategoria = jbsCategoria;
 //       this.jbsEspecifica = jbsEspecifica;
-//       this.pedidosProdutoses = pedidosProdutoses;
 //       this.jbsVendaProdutos = jbsVendaProdutos;
 //    }
    
@@ -103,15 +101,6 @@ public class JbsProduto  implements java.io.Serializable {
         this.jbsEspecifica = jbsEspecifica;
     }
 
-//@OneToMany(fetch=FetchType.LAZY, mappedBy="jbsProduto")
-//    public Set getPedidosProdutoses() {
-//        return this.pedidosProdutoses;
-//    }
-//    
-//    public void setPedidosProdutoses(Set pedidosProdutoses) {
-//        this.pedidosProdutoses = pedidosProdutoses;
-//    }
-//
 //@OneToMany(fetch=FetchType.LAZY, mappedBy="jbsProduto")
 //    public Set getJbsVendaProdutos() {
 //        return this.jbsVendaProdutos;

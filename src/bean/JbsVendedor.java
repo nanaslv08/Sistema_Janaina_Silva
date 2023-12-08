@@ -1,5 +1,5 @@
 package bean;
-// Generated 30/10/2023 10:00:06 by Hibernate Tools 4.3.1
+// Generated 08/12/2023 16:18:45 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -32,7 +32,6 @@ public class JbsVendedor  implements java.io.Serializable {
      private Date jbsDataNasc;
      private int jbsEstado;
      private int jbsGenero;
-//     private Set pedidoses = new HashSet(0);
 //     private Set jbsVendas = new HashSet(0);
 
     public JbsVendedor() {
@@ -49,7 +48,7 @@ public class JbsVendedor  implements java.io.Serializable {
         this.jbsEstado = jbsEstado;
         this.jbsGenero = jbsGenero;
     }
-//    public JbsVendedor(int jbsIdVendedor, String jbsNome, String jbsCpf, String jbsEmail, String jbsCelular, Date jbsDataNasc, String jbsEstado, String jbsGenero, Set pedidoses, Set jbsVendas) {
+//    public JbsVendedor(int jbsIdVendedor, String jbsNome, String jbsCpf, String jbsEmail, String jbsCelular, Date jbsDataNasc, int jbsEstado, int jbsGenero, Set jbsVendas) {
 //       this.jbsIdVendedor = jbsIdVendedor;
 //       this.jbsNome = jbsNome;
 //       this.jbsCpf = jbsCpf;
@@ -58,7 +57,6 @@ public class JbsVendedor  implements java.io.Serializable {
 //       this.jbsDataNasc = jbsDataNasc;
 //       this.jbsEstado = jbsEstado;
 //       this.jbsGenero = jbsGenero;
-//       this.pedidoses = pedidoses;
 //       this.jbsVendas = jbsVendas;
 //    }
    
@@ -145,15 +143,6 @@ public class JbsVendedor  implements java.io.Serializable {
     }
 
 //@OneToMany(fetch=FetchType.LAZY, mappedBy="jbsVendedor")
-//    public Set getPedidoses() {
-//        return this.pedidoses;
-//    }
-//    
-//    public void setPedidoses(Set pedidoses) {
-//        this.pedidoses = pedidoses;
-//    }
-//
-//@OneToMany(fetch=FetchType.LAZY, mappedBy="jbsVendedor")
 //    public Set getJbsVendas() {
 //        return this.jbsVendas;
 //    }
@@ -162,6 +151,20 @@ public class JbsVendedor  implements java.io.Serializable {
 //        this.jbsVendas = jbsVendas;
 //    }
 
+    @Override
+     public String toString() {
+    return jbsNome;
+}
+
+
+    public boolean raiva (Object object){
+      if(object instanceof JbsVendedor){
+      JbsVendedor jbsVendedor = (JbsVendedor) object;
+        if(this.getJbsIdVendedor()== jbsVendedor.getJbsIdVendedor())
+            return true;
+                }         
+                return false;
+      }
 
 
 

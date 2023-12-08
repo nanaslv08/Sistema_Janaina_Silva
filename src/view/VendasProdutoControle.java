@@ -22,8 +22,18 @@ public class VendasProdutoControle extends AbstractTableModel{
         this.fireTableDataChanged();
     }
     
+    @Override
+    public int getRowCount() {
+        return lista.size();
+    }
+    
     public JbsVendaProduto getBean(int row){
         return (JbsVendaProduto) lista.get(row);
+    }
+    
+    @Override
+    public int getColumnCount() {
+        return 5;    
     }
     
     public void addBean(JbsVendaProduto jbsVendaProduto){
@@ -31,24 +41,14 @@ public class VendasProdutoControle extends AbstractTableModel{
         this.fireTableDataChanged();
     }
     
-    public void removeBean(int Index){
-        lista.remove(Index);
+    public void removeBean(int index){
+        lista.remove(index);
         this.fireTableDataChanged();
     }
     
-    public void updateBean(int Index, JbsVendaProduto jbsVendaProduto){
-        lista.set(Index, jbsVendaProduto);
+    public void updateBean(int index, JbsVendaProduto jbsVendaProduto){
+        lista.set(index, jbsVendaProduto);
         this.fireTableDataChanged();
-    }
-    
-    @Override
-    public int getRowCount() {
-        return lista.size();
-    }
-
-    @Override
-    public int getColumnCount() {
-        return 5;    
     }
 
     @Override

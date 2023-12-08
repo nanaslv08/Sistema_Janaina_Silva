@@ -41,12 +41,12 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="db_janaina_silva"/>
-  <table-filter match-name="jbs_produto"/>
-  <table-filter match-name="jbs_vendedor"/>
-  <table-filter match-name="jbs_cliente"/>
-  <table-filter match-name="jbs_usuario"/>
   <table-filter match-name="pedidos"/>
+  <table-filter match-name="jbs_vendedor"/>
+  <table-filter match-name="jbs_usuario"/>
+  <table-filter match-name="jbs_venda_produto"/>
   <table-filter match-name="pedidos_produtos"/>
   <table-filter match-name="jbs_venda"/>
-  <table-filter match-name="jbs_venda_produto"/>
+  <table-filter match-name="jbs_produto"/>
+  <table-filter match-name="jbs_cliente"/>
 </hibernate-reverse-engineering>

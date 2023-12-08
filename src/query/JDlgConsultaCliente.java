@@ -30,6 +30,7 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
         setTitle("Consulta de Clientes");
         setLocationRelativeTo(null);
         clienteControle = new ClienteControle();
+        
         clienteDAO = new ClienteDAO();
         List lista = clienteDAO.listAll();
         clienteControle.setList(lista);
