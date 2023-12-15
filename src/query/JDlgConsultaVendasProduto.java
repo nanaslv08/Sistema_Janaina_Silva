@@ -76,7 +76,7 @@ public class JDlgConsultaVendasProduto extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setText("Quantidade");
+        jLabel2.setText("Quantidade - Maior que");
 
         JBS_jTxtQuantidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

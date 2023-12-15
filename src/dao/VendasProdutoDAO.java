@@ -66,7 +66,7 @@ public class VendasProdutoDAO extends DaoAbstract{
         session.beginTransaction();
         Criteria criteria = session.createCriteria(JbsVendaProduto.class);
 //        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
-        criteria.add(Restrictions.like("jbsQuantidade", quantidade, MatchMode.ANYWHERE));
+        criteria.add(Restrictions.gt("jbsQuantidade", quantidade));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;        
@@ -86,7 +86,7 @@ public class VendasProdutoDAO extends DaoAbstract{
         Criteria criteria = session.createCriteria(JbsVendaProduto.class);
 //        criteria.add(Restrictions.like("jbsNome", "%" + nome + "%"));
         criteria.add(Restrictions.gt("jbsValorUnitario", valorUnitario));
-        criteria.add(Restrictions.like("jbsQuantidade", quantidade, MatchMode.ANYWHERE));
+        criteria.add(Restrictions.gt("jbsQuantidade", quantidade));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;        
