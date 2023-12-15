@@ -5,10 +5,8 @@
  */
 package query;
 
-import bean.JbsCliente;
 import dao.ClienteDAO;
 import java.util.List;
-import tools.Util;
 import view.ClienteControle;
 
 /**
@@ -19,7 +17,6 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
 
     private ClienteControle clienteControle;
     ClienteDAO clienteDAO;
-    JbsCliente cliente;
 
     /**
      * Creates new form JDlgConsultaCliente
