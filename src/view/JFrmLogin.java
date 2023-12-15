@@ -5,6 +5,10 @@
  */
 package view;
 
+import bean.JbsUsuario;
+import dao.UsuarioDAO;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import tools.Util;
 
 /**
@@ -13,12 +17,47 @@ import tools.Util;
  */
 public class JFrmLogin extends javax.swing.JFrame {
 
+    JbsUsuario jbsUsuario; 
+    UsuarioDAO usuarioDAO;
     /**
      * Creates new form JFrmLogin
      */
     public JFrmLogin() {
         initComponents();
+        setTitle("Login");
+        setLocationRelativeTo(null);
+        jbsUsuario = new JbsUsuario();
+        usuarioDAO = new UsuarioDAO();
     }
+    
+//    int contagem;
+//
+//    public void entrar() {
+//        System.out.println(JBS_jTxtUsuario.getText());
+//        System.out.println(JBS_jPwfSenha.getPassword());
+//        System.out.println(JBS_jTxtUsuario.getText());
+//        System.out.println(JBS_jPwfSenha.getPassword());
+//        
+//        String apelido = JBS_jTxtUsuario.getText();
+//        String senha = new String(JBS_jPwfSenha.getPassword());
+//
+//        UsuarioDAO usuarioDAO = new UsuarioDAO();
+//        
+//        if (usuarioDAO.logar(apelido, senha) != null) {
+//            JFrmPrincipal jFrmPrincipal = new JFrmPrincipal();
+//            jFrmPrincipal.setVisible(true);
+//            JDlgLogin.this.dispose();
+//            contagem = 0;
+//        } else {
+//             contagem++;
+//             JOptionPane.showMessageDialog(null, "Usuário ou senha está incorreto" + contagem + "/3", "ERRO!", JOptionPane.ERROR_MESSAGE);
+//        } 
+//        if (contagem >= 3){
+//                JOptionPane.showMessageDialog(null, "Não é um usuário, o sistema será fechado", "ERRO!", JOptionPane.ERROR_MESSAGE);
+//                System.exit(0);
+//                }
+//        
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -100,15 +139,67 @@ public class JFrmLogin extends javax.swing.JFrame {
 
     private void JBS_jBtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnLoginActionPerformed
 
-        if (JBS_jPwfSenha.getText().equalsIgnoreCase("admin") && JBS_jTxtUsuario.getText().equalsIgnoreCase("Janaina") 
-                || (JBS_jPwfSenha.getText().equalsIgnoreCase("senha") && !JBS_jTxtUsuario.getText().equalsIgnoreCase("Nana"))) {
-            JFrmPrincipal jFrmPrincipal = new JFrmPrincipal();
-            jFrmPrincipal.setVisible(true);
-            this.dispose();
-            Util.mensagem("Acesso Permitido");
-        } else {
-            Util.mensagem("Não sabe a senha né?");
-        }
+//        if (JBS_jPwfSenha.getText().equalsIgnoreCase("admin") && JBS_jTxtUsuario.getText().equalsIgnoreCase("Janaina") 
+//                || (JBS_jPwfSenha.getText().equalsIgnoreCase("senha") && !JBS_jTxtUsuario.getText().equalsIgnoreCase("Nana"))) {
+//            JFrmPrincipal jFrmPrincipal = new JFrmPrincipal();
+//            jFrmPrincipal.setVisible(true);
+//            this.dispose();
+//            Util.mensagem("Acesso Permitido");
+//        } else {
+//            Util.mensagem("Não sabe a senha né?");
+//        }
+//          JFrmPrincipal principal = new JFrmPrincipal();
+//          
+//          String apelido, senhaL;
+//          apelido = JBS_jTxtUsuario.getText();
+//          senhaL = JBS_jPwfSenha.getText();
+//          
+////          jbsUsuario.setJbsNome(nomeL);
+////          jbsUsuario.setJbsSenha(senhaL);
+//          
+//          if(apelido.equals(usuarioDAO.Loginzinho(apelido)) && senhaL.equals(usuarioDAO.Loginzinho(senhaL))){
+//              principal.setVisible(true);
+//              JFrmLogin.this.dispose();
+//          } else {
+//              Util.mensagem("Se esqueceu a senha lasco em");
+//          }
+          
+//          JbsUsuario usuarioSenha = usuarioDAO.listSenha(senhaL);
+//          JbsUsuario usuarioNome = usuarioDAO.listNome2(nomeL);
+//          
+//          if (usuarioNome != null && usuarioSenha != null) {
+//              principal.setVisible(true);
+//              JFrmLogin.this.dispose();
+//          } else {
+//              Util.mensagem("Se esqueceu a senha lasco em");
+//          }
+
+//try{
+//    String apelido, senhaL;
+//    apelido = JBS_jTxtUsuario.getText();
+//    senhaL = JBS_jPwfSenha.getText();
+//    
+//    jbsUsuario.setJbsNome(apelido);
+//    jbsUsuario.setJbsSenha(senhaL);
+//
+//}catch (SQLException erro){
+//    Util.mensagem("Se esqueceu a senha né?" + erro);
+//}
+
+            JFrmPrincipal principal = new JFrmPrincipal();
+            String apelidoL = JBS_jTxtUsuario.getText();
+            String senhaL = JBS_jPwfSenha.getText();
+
+            JbsUsuario jbsUsuario = usuarioDAO.Loginzinho(apelidoL, senhaL);
+
+            if (jbsUsuario != null) {
+                // Login bem-sucedido
+                principal.setVisible(true);
+                JFrmLogin.this.dispose();
+            } else {
+                // Login falhou
+                Util.mensagem("Usuário ou senha incorretos");
+            }
     }//GEN-LAST:event_JBS_jBtnLoginActionPerformed
 
     private void JBS_jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnCancelarActionPerformed

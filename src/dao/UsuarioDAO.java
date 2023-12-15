@@ -91,4 +91,40 @@ public class UsuarioDAO extends DaoAbstract{
         return lista;        
     }
     
+//    public List listSenha(String senha){
+//        session.beginTransaction();
+//        Criteria criteria = session.createCriteria(JbsUsuario.class);
+//        criteria.add(Restrictions.like("jbsSenha", senha, MatchMode.ANYWHERE));
+//        List lista = criteria.list();
+//        session.getTransaction().commit();
+//        return lista;        
+//    }
+//    public List listApelido(String apelido){
+//        session.beginTransaction();
+//        Criteria criteria = session.createCriteria(JbsUsuario.class);
+//        criteria.add(Restrictions.like("jbsApelido", apelido, MatchMode.ANYWHERE));
+//        List lista = criteria.list();
+//        session.getTransaction().commit();
+//        return lista;        
+//    }
+    
+    public JbsUsuario Loginzinho (String apelido, String senha){
+        JbsUsuario jbsUsuario = null;
+        
+        session.beginTransaction();
+        
+        try{
+                Criteria criteria = session.createCriteria(JbsUsuario.class);
+                criteria.add(Restrictions.eq("jbsApelido", apelido));
+                criteria.add(Restrictions.eq("jbsSenha", senha));
+                
+                jbsUsuario = (JbsUsuario) criteria.uniqueResult();
+            } catch (Exception e){
+                e.printStackTrace();
+            } finally {
+            session.getTransaction().commit();
+        }
+        return jbsUsuario;
+    }
+    
 }
