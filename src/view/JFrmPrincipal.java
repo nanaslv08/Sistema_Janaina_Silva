@@ -55,7 +55,6 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jMnuSair = new javax.swing.JMenuItem();
         jMnuMovimentos = new javax.swing.JMenu();
         jMnuVendas = new javax.swing.JMenuItem();
-        jMnuVendasProdutos = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenu1 = new javax.swing.JMenu();
         JBS_jMnuConProduto = new javax.swing.JMenuItem();
@@ -179,16 +178,6 @@ public class JFrmPrincipal extends javax.swing.JFrame {
             }
         });
         jMnuMovimentos.add(jMnuVendas);
-
-        jMnuVendasProdutos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMnuVendasProdutos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-purchase-for-euro-16.png"))); // NOI18N
-        jMnuVendasProdutos.setText("Vendas Produto");
-        jMnuVendasProdutos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMnuVendasProdutosActionPerformed(evt);
-            }
-        });
-        jMnuMovimentos.add(jMnuVendasProdutos);
         jMnuMovimentos.add(jSeparator2);
 
         jMenuBar1.add(jMnuMovimentos);
@@ -288,12 +277,6 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jMnuSairActionPerformed
 
-    private void jMnuVendasProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuVendasProdutosActionPerformed
-        // TODO add your handling code here:
-//        JDlgVendasProduto  jDlgVendasProduto = new JDlgVendasProduto(null, true);
-//        jDlgVendasProduto.setVisible(true);
-    }//GEN-LAST:event_jMnuVendasProdutosActionPerformed
-
     private void jMnuProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuProdutosActionPerformed
         // TODO add your handling code here:
         JDlgProduto  jDlgProduto = new JDlgProduto(null, true);
@@ -302,8 +285,8 @@ public class JFrmPrincipal extends javax.swing.JFrame {
 
     private void jMnuVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuVendasActionPerformed
         // TODO add your handling code here:
-//        JDlgVendas  jDlgVendas = new JDlgVendas(null, true);
-//        jDlgVendas.setVisible(true);
+        JDlgVendas  jDlgVendas = new JDlgVendas(null, true);
+        jDlgVendas.setVisible(true);
     }//GEN-LAST:event_jMnuVendasActionPerformed
 
     private void JBS_jMnuConProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jMnuConProdutoActionPerformed
@@ -409,7 +392,6 @@ public class JFrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMnuSair;
     private javax.swing.JMenuItem jMnuUsuarios;
     private javax.swing.JMenuItem jMnuVendas;
-    private javax.swing.JMenuItem jMnuVendasProdutos;
     private javax.swing.JMenuItem jMnuVendedor;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
