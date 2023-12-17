@@ -25,6 +25,7 @@ public class JDlgVendasProduto extends javax.swing.JDialog {
     public JbsVendaProduto jbsVendaProduto;
     JDlgVendas jDlgVendas;
     VendasProdutoControle vendasProdutoControle;
+    int IdVendaN;
     /**
      * Creates new form JDlgVendasProduto
      */
@@ -33,13 +34,12 @@ public class JDlgVendasProduto extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Cadastro de Vendas");
-        produtoDAO = new ProdutoDAO();
-        jbsProduto = new JbsProduto();
-        vendasProdutoControle = new VendasProdutoControle();
+        Util.habilitar(false, JBS_jTxtTotal);
         jDlgVendas = new JDlgVendas(null, true);
-        jbsVendaProduto = new JbsVendaProduto();
+        vendasDAO = new VendasDAO();
         List lista = new ArrayList();
         
+        ProdutoDAO produtoDAO = new ProdutoDAO();
         List lista1 = produtoDAO.listAll();
         for (int p = 0; p < lista1.size(); p++) {
         JBS_jCboProduto.addItem((JbsProduto)lista1.get(p));
@@ -52,11 +52,12 @@ public class JDlgVendasProduto extends javax.swing.JDialog {
 //        this.numVendaId = numVendaId;
     }
     
-    void beanView(JbsVendaProduto vendaProduto) {
-        JBS_jCboProduto.setSelectedItem(vendaProduto.getJbsProduto());
-        JBS_jTxtQuantidade.setText(vendaProduto.getJbsQuantida());
-        JBS_jTxtVUnitario.setText(Double.toString(vendaProduto.getJbsVUnitario()));
+    public JbsVendaProduto beanView(JbsVendaProduto jbsVendaProduto) {
+        JBS_jCboProduto.setSelectedItem(jbsVendaProduto.getJbsProduto());
+        JBS_jTxtQuantidade.setText(Integer.toString(Util.strInt(jbsVendaProduto.getJbsQuantida())));
+        JBS_jTxtVUnitario.setText(Double.toString(jbsVendaProduto.getJbsVUnitario()));
         //jTxtTotal.setText(Double.toString(vendasProdutos.calculaTotal()));
+        return jbsVendaProduto;
     }
 
 
@@ -104,6 +105,12 @@ public class JDlgVendasProduto extends javax.swing.JDialog {
 
         jLabel3.setText("Valor Unitário");
 
+        JBS_jTxtVUnitario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBS_jTxtVUnitarioActionPerformed(evt);
+            }
+        });
+
         jLabel4.setText("Total");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -122,7 +129,6 @@ public class JDlgVendasProduto extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(JBS_jTxtVUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -165,6 +171,7 @@ public class JDlgVendasProduto extends javax.swing.JDialog {
 
     private void JBS_jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnOKActionPerformed
         // TODO add your handling code here:
+        JbsVendaProduto jbsVendaProduto = new JbsVendaProduto();
         jbsVendaProduto.setJbsProduto((JbsProduto) JBS_jCboProduto.getSelectedItem() );
         jbsVendaProduto.setJbsQuantida(JBS_jTxtQuantidade.getText() );
         jbsVendaProduto.setJbsVUnitario(Util.strDouble(JBS_jTxtVUnitario.getText()));
@@ -185,7 +192,7 @@ public class JDlgVendasProduto extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (JBS_jTxtQuantidade.getText().isEmpty() == false) {
             double unitario = Util.strDouble(JBS_jTxtQuantidade.getText());
-            double quantidade = Util.strDouble(JBS_jTxtQuantidade.getText());
+            double quantidade = Util.strInt(JBS_jTxtQuantidade.getText());
             JBS_jTxtTotal.setText(String.valueOf(quantidade * unitario));
         } else {
             JBS_jTxtTotal.setText("0");
@@ -197,7 +204,19 @@ public class JDlgVendasProduto extends javax.swing.JDialog {
         JBS_jTxtQuantidade.setText( "1" );
         JbsProduto jbsProdutos = (JbsProduto) JBS_jCboProduto.getSelectedItem();
         JBS_jTxtVUnitario.setText( Util.doubleStr( jbsProdutos.getJbsValor()));
+        JBS_jTxtTotal.setText(JBS_jTxtVUnitario.getText());
     }//GEN-LAST:event_jCboProdutosItemStateChanged
+
+    private void JBS_jTxtVUnitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jTxtVUnitarioActionPerformed
+        // TODO add your handling code here:
+        if (JBS_jTxtVUnitario.getText().isEmpty() == false) {
+            double unitario = Util.strDouble(JBS_jTxtQuantidade.getText());
+            double quantidade = Util.strInt(JBS_jTxtQuantidade.getText());
+            JBS_jTxtTotal.setText(String.valueOf(quantidade * unitario));
+        } else {
+            JBS_jTxtTotal.setText("0");
+        }
+    }//GEN-LAST:event_JBS_jTxtVUnitarioActionPerformed
     /**
      * @param args the command line arguments
      */

@@ -48,7 +48,7 @@ public class JDlgVendas extends javax.swing.JDialog {
         initComponents();
         setTitle("Cadastro de Vendas");
         setLocationRelativeTo(null);
-//        vendasDAO = new VendasDAO();
+        vendasDAO = new VendasDAO();
 //        jbsCliente = new JbsCliente();
 //        jbsVendedor = new JbsVendedor();
 //        jDlgVendasProduto = new JDlgVendasProduto(null, true);
@@ -520,12 +520,15 @@ public class JDlgVendas extends javax.swing.JDialog {
         Util.habilitar(false, JBS_jBtnIncluir, JBS_jBtnAlterar, JBS_jBtnExcluir, JBS_jBtnPesquisar);
 //        incluindo = false;
 //        
-        jbsVenda = new JbsVenda();
+//            jbsVenda = new JbsVenda();
         if ( jbsVenda!= null) {
             vendasDAO = new VendasDAO();
+            JbsVendaProduto jbsVendaProduto;
             for (int lin = 0; lin < jTable1.getRowCount(); lin++){
-                jbsVendasProduto = vendasProdutoControle.getBean(lin);
-                vendasDAO.delete(jbsVendasProduto);
+//                jbsVendasProduto = vendasProdutoControle.getBean(lin);
+                jbsVendaProduto = vendasProdutoControle.getBean(lin);
+//                vendasDAO.delete(jbsVendasProduto);
+                vendasDAO.delete(jbsVendaProduto);
             }
 //            habilitar(true);
                Util.habilitar(true,JBS_jTxtNumOs, JBS_jFmtDataVenda, JBS_jCboCliente, 
@@ -534,9 +537,14 @@ public class JDlgVendas extends javax.swing.JDialog {
                Util.habilitar(false, JBS_jBtnIncluir, JBS_jBtnAlterar, JBS_jBtnExcluir, JBS_jBtnPesquisar);
         } else {
             Util.mensagem("Deve ser realizada uma pesquisa antes");
+            Util.habilitar(true, JBS_jBtnIncluir, JBS_jBtnAlterar, JBS_jBtnExcluir, JBS_jBtnPesquisar);
         }
         incluindo = false;
 
+        //        Util.habilitar(true,JBS_jTxtNumOs, JBS_jFmtDataVenda, JBS_jCboCliente, 
+//                JBS_jCboVendedor, JBS_jFmtTotal, JBS_jBtnCancelar, JBS_jBtnConfirmar);
+        Util.habilitar(false, JBS_jBtnIncluir, JBS_jBtnAlterar, JBS_jBtnExcluir, JBS_jBtnPesquisar);
+//        incluindo = fal
     }//GEN-LAST:event_JBS_jBtnAlterarActionPerformed
 
     private void JBS_jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBS_jBtnExcluirActionPerformed
