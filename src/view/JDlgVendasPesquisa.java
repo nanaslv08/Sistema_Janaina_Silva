@@ -25,17 +25,17 @@ public class JDlgVendasPesquisa extends javax.swing.JDialog {
     public JDlgVendasPesquisa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setTitle("Pesquisa de Vendas");
+        setLocationRelativeTo(null);
         jbsVenda = new JbsVenda();
         vendasControle = new VendasControle();
         vendasDAO = new VendasDAO();
         List lista = vendasDAO.listAll();
         vendasControle.setList(lista);
         jTable1.setModel(vendasControle);
-        setTitle("Pesquisa de Vendas");
-        setLocationRelativeTo(null);
     }
     
-    public void setTelaAnterior (JDlgVendas jDlgVendas){
+    public void setTelaAnterior (JDlgVendas jDlgVendas){;
         this.jDlgVendas = jDlgVendas;
     }
 

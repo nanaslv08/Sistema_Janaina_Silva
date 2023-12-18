@@ -113,6 +113,27 @@ public class JbsProduto  implements java.io.Serializable {
 
 
 
+    @Override
+     public String toString() {
+    return jbsNome;
+}
+
+
+      public boolean raiva (Object object){
+      if(object instanceof JbsProduto){
+      // Verifica se o objeto passado como argumento é uma instância de MmsCliente
+      JbsProduto jbsProduto = (JbsProduto) object;
+      // Converte o objeto genérico para o tipo MmsCliente
+        if(this.getJbsIdProduto()== jbsProduto.getJbsIdProduto())
+              // Compara os IDs dos objetos atual e recebido como parâmetro
+            return true;
+             // Se os IDs forem iguais, retorna verdadeiro (indicando que os objetos são iguais)
+                }         
+                return false;
+                    // Se não for uma instância de MmsCliente ou os IDs forem diferentes, retorna falso
+
+                    //essa função é usada no cbo para igualar as fks de cliente no banco de dados
+      }
 }
 
 

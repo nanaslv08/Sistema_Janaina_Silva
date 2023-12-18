@@ -68,6 +68,7 @@ public class Util {
     }
     public static double strDouble(String cad){
         return Double.parseDouble(cad);
+//        return Float.parseFloat(cad);
     }
     public static String doubleStr(double num){
      return Double.toString(num);
