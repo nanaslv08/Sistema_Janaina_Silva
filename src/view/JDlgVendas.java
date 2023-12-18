@@ -432,11 +432,11 @@ public class JDlgVendas extends javax.swing.JDialog {
 //                JBS_jBtnAlterarProd, JBS_jBtnExcluirProd, JBS_jBtnIncluirProd);
 //        Util.habilitar(true, JBS_jBtnIncluir, JBS_jBtnAlterar, JBS_jBtnExcluir, JBS_jBtnPesquisar);
         
-       
+        vendasProdutoDAO = new VendasProdutoDAO();
+        vendasProdutoDAO = new VendasProdutoDAO();
             
         if (incluindo == true) {
             vendasDAO.insert(ViewBean());
-            vendasProdutoDAO = new VendasProdutoDAO();
             
             for (int linha = 0; linha < jTable1.getRowCount(); linha++) {
                 jbsVendaProduto = vendasProdutoControle.getBean(linha);
@@ -446,7 +446,6 @@ public class JDlgVendas extends javax.swing.JDialog {
         } else {
             vendasDAO.update(ViewBean());
             //remover todos os pedidos produtos deste pedido
-            vendasProdutoDAO = new VendasProdutoDAO();
 
             //incluir todos os pedidosProduto que estao no jtable
             for (int linha = 0; linha < jTable1.getRowCount(); linha++) {

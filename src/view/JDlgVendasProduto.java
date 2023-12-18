@@ -175,6 +175,7 @@ public class JDlgVendasProduto extends javax.swing.JDialog {
         jbsVendaProduto.setJbsProduto((JbsProduto) JBS_jCboProduto.getSelectedItem() );
         jbsVendaProduto.setJbsQuantida(JBS_jTxtQuantidade.getText() );
         jbsVendaProduto.setJbsVUnitario(Util.strDouble(JBS_jTxtVUnitario.getText()));
+        jbsVendaProduto.setJbsTotal(Util.strDouble(jbsVendaProduto.getJbsQuantida()) * jbsVendaProduto.getJbsVUnitario());
         if (getTitle().toUpperCase().substring(0, 1).equals("I")) {
            jDlgVendas.vendasProdutoControle.addBean(jbsVendaProduto);
         } else {            
